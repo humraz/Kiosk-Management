@@ -1,0 +1,46 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    tools:context="com.perchtech.humraz.farmkiosk.admin.sales">
+
+    <it.gmariotti.cardslib.library.view.CardListView
+        android:layout_width="match_parent"
+        android:id="@+id/myList"
+        android:layout_height="match_parent" />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+
+        android:layout_marginTop="5px"
+        android:gravity="right|bottom"
+        android:paddingTop="2px"
+        >
+
+        <Button
+            android:text="Select Date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/button6"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary"
+            android:elevation="4dp"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_marginBottom="6dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="8dp"
+            android:onClick="clic" />
+
+        <com.nightonke.boommenu.BoomMenuButton
+            android:id="@+id/bmb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:bmb_buttonEnum="ham"
+            android:gravity="right|bottom"
+
+            />
+    </LinearLayout>
+
+</RelativeLayout>

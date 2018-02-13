@@ -1,0 +1,235 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+
+    xmlns:custom="http://schemas.android.com/tools"
+    tools:context="com.perchtech.humraz.farmkiosk.errorafterstock"
+    android:background="#ff56d0ff">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:paddingRight="20dp"
+        android:gravity="center_horizontal|center"
+        android:layout_gravity="center_horizontal|center">
+        <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/card_view3assdsddS"
+            android:layout_gravity="center_horizontal|center"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            card_view:cardCornerRadius="4dp"
+            android:background="@color/blue_btn_bg_color">
+
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/tvsdsds12"
+                android:layout_marginTop="2dp"
+
+                android:text="     Money Account     "
+                android:textSize="17sp" />
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/carddsdsds_viewasd3asdS"
+            android:layout_gravity="center_horizontal|center"
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            card_view:cardCornerRadius="4dp"
+            android:background="@color/blue_btn_bg_color">
+
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/tv122"
+                android:layout_marginTop="2dp"
+
+                android:text="No Data"
+                android:textSize="17sp" />
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/carddsdsds_view3asdS"
+            android:layout_gravity="center_horizontal|center"
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            card_view:cardCornerRadius="4dp"
+            android:background="@color/blue_btn_bg_color">
+
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/tv12"
+                android:layout_marginTop="2dp"
+
+                android:text="No Data"
+                android:textSize="17sp" />
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/card_viewF3"
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            card_view:cardCornerRadius="4dp"
+            android:background="@color/blue_btn_bg_color">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/tv11"
+                android:text="No Data"
+                android:textSize="17sp" />
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/card_viFdew3"
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            card_view:cardCornerRadius="4dp"
+            android:background="@color/blue_btn_bg_color">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/tv3"
+                android:text="No Data"
+                android:textSize="17sp" />
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/card_viFsewds3"
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            card_view:cardCornerRadius="4dp"
+            android:background="@color/blue_btn_bg_color">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/tv4"
+                android:text="No Data"
+                android:textSize="17sp" />
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/card_vdiFew3"
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            card_view:cardCornerRadius="4dp"
+            android:background="@color/blue_btn_bg_color">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/tv5"
+                android:text="No Data"
+                android:textSize="17sp" />
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/card_vdiFew3sdf"
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            card_view:cardCornerRadius="4dp"
+            android:background="@color/blue_btn_bg_color">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/tv555"
+                android:text="No Data"
+                android:textSize="17sp" />
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/card_viFsew3"
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            card_view:cardCornerRadius="4dp"
+            android:background="@color/blue_btn_bg_color">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/tv55"
+                android:text="No Data"
+                android:textSize="17sp" />
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+
+    <Button
+        android:text="    Number Of Nuts    "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button7"
+        android:onClick="no"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center_horizontal" />
+
+    <com.dd.processbutton.iml.ActionProcessButton
+           android:id="@+id/SIG"
+           android:layout_width="wrap_content"
+
+           android:layout_height="wrap_content"
+           android:text="CONFIRM AND LOG OUT"
+           android:textColor="@android:color/white"
+           android:textSize="18sp"
+           custom:pb_colorComplete="@color/green_complete"
+           custom:pb_colorNormal="@color/blue_normal"
+           custom:pb_colorPressed="@color/blue_pressed"
+           custom:pb_colorProgress="@color/purple_progress"
+           custom:pb_textComplete="Success"
+           custom:pb_textProgress="Loading"
+           custom:pb_textError="Error"
+           custom:pb_colorError="@color/red_error"
+           android:layout_below="@+id/btnSignIn"
+           android:layout_marginTop="30dp"
+           android:onClick="YO"
+           android:layout_alignLeft="@+id/btnSignIn"
+           android:layout_alignStart="@+id/btnSignIn"
+           android:layout_alignRight="@+id/btnSignIn"
+           android:layout_alignEnd="@+id/btnSignIn"
+           android:layout_gravity="center_horizontal" />
+
+   </LinearLayout>
+
+</ScrollView>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:custom="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fitsSystemWindows="true"
+    android:background="#ff71c2ff">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="56dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:weightSum="1">
+
+        <!-- Email Label -->
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Kiosk Name"
+            app:met_baseColor="#fffffbf9"
+            app:met_textColorHint="#ffdfdbd9"
+            app:met_primaryColor="#ff46e358"
+            app:met_errorColor="#ffff7064"
+            android:id="@+id/fname"
+            app:met_floatingLabel="normal"
+            app:met_minCharacters="0"
+            app:met_maxCharacters="25"
+
+            />
+
+        <!-- Password Label -->
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Password For Kiosk"
+            app:met_baseColor="#fffffbf9"
+            app:met_textColorHint="#ffdfdbd9"
+            app:met_primaryColor="#ff46e358"
+            app:met_errorColor="#ffff7064"
+            android:id="@+id/pass"
+            android:layout_marginTop="20dp"
+            app:met_floatingLabel="normal"
+            app:met_minCharacters="0"
+            app:met_maxCharacters="25"
+
+            />
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Kiosk Phno"
+            app:met_baseColor="#fffffbf9"
+            app:met_textColorHint="#ffdfdbd9"
+            app:met_primaryColor="#ff46e358"
+            app:met_errorColor="#ffff7064"
+            android:id="@+id/phn"
+            android:inputType="number"
+            app:met_floatingLabel="normal"
+            app:met_minCharacters="0"
+            app:met_maxCharacters="25"
+
+            />
+        <com.dd.processbutton.iml.ActionProcessButton
+            android:id="@+id/sign"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="CREATE"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            custom:pb_colorComplete="@color/green_complete"
+            custom:pb_colorNormal="@color/blue_normal"
+            custom:pb_colorPressed="@color/blue_pressed"
+            custom:pb_colorProgress="@color/purple_progress"
+            custom:pb_textComplete="Success"
+            custom:pb_textProgress="Loading"
+            custom:pb_textError="Error"
+            custom:pb_colorError="@color/red_error"
+            android:onClick="click"
+            android:layout_below="@+id/linearLayout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="20dp" />
+
+    </LinearLayout>
+</ScrollView>

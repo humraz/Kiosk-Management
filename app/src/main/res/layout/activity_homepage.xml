@@ -1,0 +1,63 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:id="@+id/license_agree_scrollView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:fillViewport="true">
+        <it.gmariotti.cardslib.library.view.CardListView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/myList"
+            android:background="@color/book_loading_book" />
+    </ScrollView>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center_horizontal">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            android:background="@color/book_loading_book">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:layout_gravity="center_horizontal">
+
+                <com.nightonke.boommenu.BoomMenuButton
+                    android:id="@+id/bmb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:bmb_buttonEnum="textOutsideCircle"
+                    app:bmb_piecePlaceEnum="piecePlace_dot_9_1"
+                    app:bmb_buttonPlaceEnum="buttonPlace_sc_9_1"
+                    android:layout_gravity="center_horizontal"
+                    android:foregroundGravity="right|center_horizontal" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

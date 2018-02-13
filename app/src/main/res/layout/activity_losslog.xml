@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_losslog"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context="com.perchtech.humraz.farmkiosk.warehouse.losslog">
+    <it.gmariotti.cardslib.library.view.CardListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/myList"
+        android:background="@color/book_loading_book" />
+</RelativeLayout>

@@ -1,0 +1,64 @@
+<resources>
+    <string name="app_name">EcoNut</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_billing">billing</string>
+    <string name="title_activity_afterbilling">afterbilling</string>
+    <string name="title_activity_loginactivity">Econut</string>
+    <string name="title_activity_successafterbilling">successafterbilling</string>
+    <string name="title_activity_stocktakingfirst">Stocktakingfirst</string>
+    <string name="title_activity_successafterstock">Successafterstock</string>
+    <string name="title_activity_errorafterstock">errorafterstock</string>
+    <string name="title_activity_orderingfirst">orderingfirst</string>
+    <string name="title_activity_ordersecond">ordersecond</string>
+    <string name="title_activity_successafterorder">Successafterorder</string>
+    <string name="date_picker_result_value">Year: %1$s\nMonth: %2$s\nDay: %3$s</string>
+    <string name="title_activity_pastorders">pastorders</string>
+    <string name="title_activity_warehouseconfirmorder">warehouseconfirmorder</string>
+    <string name="title_activity_salesactivity">salesactivity</string>
+    <string name="title_activity_menuforkiosk">menuforkiosk</string>
+    <string name="ham">h</string>
+    <string name="bill">Billing</string>
+    <string name="order">Orders</string>
+    <string name="close">Closing Balance</string>
+    <string name="sale">Sales Graph</string>
+    <string name="title_activity_cashflow">cashflow</string>
+    <string name="title_activity_kwise">kwise</string>
+    <string name="title_activity_kiosklist">kiosklist</string>
+    <string name="title_activity_sales">sales</string>
+    <string name="cashflow">Cashflow</string>
+    <string name="sales">Sales</string>
+    <string name="make">Create Kiosk</string>
+    <string name="sales2">Add Supplier</string>
+    <string name="spinner_title">Select Supplier</string>
+    <string name="home">HomePage</string>
+    <string name="salechart">Sales Chart</string>
+    <string name="loss">Loss MGMT</string>
+    <string name="depoit">Bank Deposit</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="depsi">Deposit</string>
+    <string name="sess">Close Session</string>
+    <string name="reset">Reset</string>
+    <string name="title_activity_pmhomepage">pmhomepage</string>
+    <string name="bills">Billing</string>
+    <string name="los">Loss</string>
+    <string name="billhistory">Bill History</string>
+    <string name="reposrt">Report Loss</string>
+    <string name="harvest">Harvest</string>
+    <string name="damages">Damages</string>
+    <string name="depsit">Table And Cashflow</string>
+</resources>

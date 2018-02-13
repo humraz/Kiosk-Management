@@ -1,0 +1,186 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:onClick="#ff56d0ff"
+    android:fillViewport="false"
+
+    android:background="#ff56d0ff">
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    xmlns:custom="http://schemas.android.com/tools"
+    tools:context="com.perchtech.humraz.farmkiosk.orderingfirst"
+    android:orientation="vertical"
+    android:background="#ff56d0ff">
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+
+        card_view:cardCornerRadius="2dp"
+        card_view:contentPadding="10dp">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:textStyle="bold"
+                android:text="Available : " />
+
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:layout_width="match_parent"
+        android:layout_marginTop="30dp"
+        android:layout_height="wrap_content"
+        android:hint="Amount Required"
+        app:met_baseColor="#fffffbf9"
+        app:met_textColorHint="#fffffbf9"
+        app:met_primaryColor="#ff46e358"
+        android:inputType="numberDecimal"
+        app:met_errorColor="#ffff7064"
+        android:id="@+id/order"
+        app:met_floatingLabel="normal"
+        app:met_minCharacters="0"
+        app:met_maxCharacters="25"
+
+        />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal">
+        <com.dd.processbutton.iml.ActionProcessButton
+            android:id="@+id/d1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TODAY"
+            android:textColor="@android:color/white"
+            android:textSize="15sp"
+            custom:pb_colorComplete="@color/green_complete"
+            custom:pb_colorNormal="@color/green_normal"
+            custom:pb_colorPressed="@color/blue_pressed"
+            custom:pb_colorProgress="@color/purple_progress"
+            custom:pb_textComplete="Success"
+            custom:pb_textProgress="Loading"
+            custom:pb_textError="Error"
+            custom:pb_colorError="@color/red_error"
+            android:onClick="today"
+            android:layout_below="@+id/linearLayout"
+            android:layout_centerHorizontal="true"
+
+
+            android:layout_marginRight="10dp" />
+        <com.dd.processbutton.iml.ActionProcessButton
+            android:id="@+id/d2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TOMORROW"
+            android:textColor="@android:color/white"
+            android:textSize="15sp"
+            custom:pb_colorComplete="@color/green_complete"
+            custom:pb_colorNormal="@color/green_normal"
+            custom:pb_colorPressed="@color/blue_pressed"
+            custom:pb_colorProgress="@color/purple_progress"
+            custom:pb_textComplete="Success"
+            custom:pb_textProgress="Loading"
+            custom:pb_textError="Error"
+            custom:pb_colorError="@color/red_error"
+            android:onClick="tomorrow"
+            android:layout_below="@+id/linearLayout"
+            android:layout_centerHorizontal="true"
+
+
+            android:layout_marginRight="10dp" />
+        <com.dd.processbutton.iml.ActionProcessButton
+            android:id="@+id/dd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Choose"
+            android:textColor="@android:color/white"
+            android:textSize="15sp"
+            custom:pb_colorComplete="@color/green_complete"
+            custom:pb_colorNormal="@color/green_normal"
+            custom:pb_colorPressed="@color/blue_pressed"
+            custom:pb_colorProgress="@color/purple_progress"
+            custom:pb_textComplete="Success"
+            custom:pb_textProgress="Loading"
+            custom:pb_textError="Error"
+            custom:pb_colorError="@color/red_error"
+            android:onClick="clic"
+            android:layout_below="@+id/linearLayout"
+            android:layout_centerHorizontal="true" />
+    </LinearLayout>
+
+    <ToggleButton
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="URGENT"
+        android:textOff="Not Urgent"
+        android:textOn="Urgent"
+        android:id="@+id/toggleButton"
+        android:layout_gravity="center_horizontal"
+        android:checked="false"
+        android:onClick="k" />
+    <com.dd.processbutton.iml.ActionProcessButton
+        android:id="@+id/confirmorder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CONFIRM AMOUNT"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        custom:pb_colorComplete="@color/green_complete"
+        custom:pb_colorNormal="@color/blue_normal"
+        custom:pb_colorPressed="@color/blue_pressed"
+        custom:pb_colorProgress="@color/purple_progress"
+        custom:pb_textComplete="Success"
+        custom:pb_textProgress="Loading"
+        custom:pb_textError="Error"
+        custom:pb_colorError="@color/red_error"
+        android:onClick="confirm"
+        android:layout_below="@+id/linearLayout"
+        android:layout_centerHorizontal="true"
+
+        android:layout_marginTop="20dp" />
+    <com.dd.processbutton.iml.ActionProcessButton
+        android:id="@+id/pastorders"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="PAST ORDERS"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        custom:pb_colorComplete="@color/green_complete"
+        custom:pb_colorNormal="@color/green_normal"
+        custom:pb_colorPressed="@color/blue_pressed"
+        custom:pb_colorProgress="@color/purple_progress"
+        custom:pb_textComplete="Success"
+        custom:pb_textProgress="Loading"
+        custom:pb_textError="Error"
+        custom:pb_colorError="@color/red_error"
+        android:onClick="clicc"
+        android:layout_below="@+id/linearLayout"
+        android:layout_centerHorizontal="true"
+
+        android:layout_marginTop="20dp" />
+
+</LinearLayout>
+</ScrollView>

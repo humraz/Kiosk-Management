@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:custom="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fitsSystemWindows="true"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:background="#00b0ff">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp">
+
+        <!-- Email Label -->
+
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_viesdw2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            card_view:cardCornerRadius="2dp"
+            card_view:contentPadding="10dp"
+            android:layout_marginTop="20dp">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:text="Enter Password To Confirm"
+android:layout_marginTop="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView29"
+                    android:layout_weight="1"
+                    android:textStyle="normal|bold"
+                    android:textSize="20sp" />
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="15dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    app:met_baseColor="#0a0909"
+                    app:met_textColorHint="#b7b1ae"
+                    app:met_primaryColor="#ff46e358"
+                    app:met_errorColor="#ffff7064"
+                    android:id="@+id/pass"
+                    app:met_floatingLabel="normal"
+                    app:met_minCharacters="0"
+                    app:met_maxCharacters="25"
+
+                    />
+
+                <com.dd.processbutton.iml.ActionProcessButton
+                    android:id="@+id/login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CONFIRM"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp"
+                    custom:pb_colorComplete="@color/green_complete"
+                    custom:pb_colorNormal="@color/blue_normal"
+                    custom:pb_colorPressed="@color/blue_pressed"
+                    custom:pb_colorProgress="@color/purple_progress"
+                    custom:pb_textComplete="Success"
+                    custom:pb_textProgress="Loading"
+                    custom:pb_textError="Error"
+                    custom:pb_colorError="@color/red_error"
+                    android:onClick="click"
+                    android:layout_below="@+id/linearLayout"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center_horizontal|center" />
+
+
+
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+        <!-- Password Label -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView12"
+            android:layout_gravity="center_horizontal|center"
+            android:textColor="@color/bootstrap_brand_danger"
+            android:gravity="center_horizontal|center" />
+    </LinearLayout>
+</ScrollView>

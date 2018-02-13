@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:custom="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fitsSystemWindows="true"
+    android:background="#00b0ff">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp">
+
+        <!-- Email Label -->
+        <com.roughike.swipeselector.SwipeSelector
+            android:id="@+id/swipe1"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+
+        </com.roughike.swipeselector.SwipeSelector>
+        <TextView
+            android:text="Does The Plot Have A Borewell?"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:id="@+id/textView15"
+            android:layout_gravity="center_horizontal" />
+        <ToggleButton
+            android:text="Borewell?"
+            android:layout_width="100dp"
+            android:layout_marginTop="10dp"
+
+            android:layout_height="wrap_content"
+            android:id="@+id/toggleButton2"
+            android:layout_gravity="center_horizontal"
+            android:textOff="NO"
+            android:textOn="YES" />
+
+        <com.dd.processbutton.iml.ActionProcessButton
+            android:id="@+id/dd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="GeoTag The Location Of Farm"
+            android:textColor="@android:color/white"
+            android:textSize="15sp"
+            custom:pb_colorComplete="@color/green_complete"
+            custom:pb_colorNormal="@color/green_normal"
+            custom:pb_colorPressed="@color/blue_pressed"
+            custom:pb_colorProgress="@color/purple_progress"
+            custom:pb_textComplete="Success"
+            custom:pb_textProgress="Loading"
+            custom:pb_textError="Error"
+            android:layout_marginTop="22dp"
+            custom:pb_colorError="@color/red_error"
+            android:onClick="location"
+            android:layout_below="@+id/linearLayout"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal" />
+
+
+
+        <com.dd.processbutton.iml.ActionProcessButton
+            android:id="@+id/ss"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Proceed"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="22dp"
+
+            android:textSize="15sp"
+            custom:pb_colorComplete="@color/green_complete"
+            custom:pb_colorNormal="@color/green_normal"
+            custom:pb_colorPressed="@color/blue_pressed"
+            custom:pb_colorProgress="@color/purple_progress"
+            custom:pb_textComplete="Success"
+            custom:pb_textProgress="Loading"
+            custom:pb_textError="Error"
+            custom:pb_colorError="@color/red_error"
+            android:layout_below="@+id/linearLayout"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:onClick="proceed" />
+    </LinearLayout>
+</ScrollView>

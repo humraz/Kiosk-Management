@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.perchtech.humraz.farmkiosk">
+
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/nut"
+        android:label="@string/app_name"
+        android:theme="@style/MyMaterialTheme"
+        tools:replace="android:icon">
+        <receiver
+            android:name=".warehouse.MyAlarmReceiver"
+            android:process=":remote" />
+
+        <service
+            android:name=".warehouse.MyTestService"
+            android:exported="false" />
+
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name=".Adminmakekiosk"
+            android:label="hi" />
+        <activity
+            android:name=".billing"
+            android:label="@string/title_activity_billing" />
+        <activity
+            android:name=".afterbilling"
+            android:label="@string/title_activity_afterbilling" />
+        <activity
+            android:name=".newlogin"
+            android:label="@string/title_activity_loginactivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".successafterbilling"
+            android:label="@string/title_activity_successafterbilling" />
+        <activity
+            android:name=".Stocktakingfirst"
+            android:label="@string/title_activity_stocktakingfirst" />
+        <activity
+            android:name=".Successafterstock"
+            android:label="@string/title_activity_successafterstock" />
+        <activity
+            android:name=".errorafterstock"
+            android:label="@string/title_activity_errorafterstock" />
+        <activity
+            android:name=".orderingfirst"
+            android:label="@string/title_activity_orderingfirst" />
+        <activity
+            android:name=".ordersecond"
+            android:label="@string/title_activity_ordersecond" />
+        <activity
+            android:name=".Successafterorder"
+            android:label="@string/title_activity_successafterorder" />
+        <activity
+            android:name=".pastorders"
+            android:label="@string/title_activity_pastorders" />
+        <activity
+            android:name=".warehouseconfirmorder"
+            android:label="@string/title_activity_warehouseconfirmorder" />
+        <activity
+            android:name=".salesactivity"
+            android:label="@string/title_activity_salesactivity" />
+        <activity
+            android:name=".menuforkiosk"
+            android:label="@string/title_activity_menuforkiosk" />
+        <activity
+            android:name=".admin.cashflow"
+            android:label="@string/title_activity_cashflow" />
+        <activity
+            android:name=".admin.kwise"
+            android:label="@string/title_activity_kwise" />
+        <activity
+            android:name=".admin.kiosklist"
+            android:label="@string/title_activity_kiosklist" />
+        <activity
+            android:name=".admin.sales"
+            android:label="@string/title_activity_sales" />
+        <activity android:name=".admin.menuadmin" />
+        <activity android:name=".admin.adminlogin" />
+        <activity
+            android:name=".salesmp"
+            android:screenOrientation="landscape" />
+        <activity android:name=".warehouse.warelogin" />
+        <activity android:name=".warehouse.waremenu" />
+        <activity android:name=".warehouse.loss" />
+        <activity android:name=".warehouse.reportloss" />
+        <activity android:name=".warehouse.pmstockincrease" />
+        <activity android:name=".warehouse.losslog" />
+        <activity android:name=".warehouse.wareorders" />
+        <activity android:name=".warehouse.fulfill" />
+        <activity android:name=".warehouse.editorder" />
+        <activity android:name=".orderreceived" />
+        <activity android:name=".warehouse.intransit" />
+        <activity android:name=".deliveredorders" />
+        <activity android:name=".warehouse.stockhistory" />
+        <activity android:name=".admin.createsupplier" />
+        <activity android:name=".warehouse.bill" />
+        <activity android:name=".warehouse.paybill" />
+        <activity android:name=".warehouse.billhistory" />
+        <activity
+            android:name=".admin.salesgraph"
+            android:screenOrientation="landscape" />
+        <activity android:name=".admin.homepage" />
+        <activity android:name=".deposit" />
+        <activity android:name=".kioskhomepage" />
+        <activity android:name=".loginactivity" />
+        <activity android:name=".depositnewhomepage" />
+        <activity android:name=".admin.resetactivity" />
+        <activity android:name=".admin.resettwo" />
+        <activity android:name=".admin.resetlogs" />
+        <activity android:name=".pm.pmlogin" />
+        <activity android:name=".pm.Main2Activity" />
+        <activity android:name=".pm.pmbill" />
+        <activity android:name=".pm.pmpaybill" />
+        <activity android:name=".pm.pmreportloss" />
+        <activity android:name=".pm.pmloss" />
+        <activity android:name=".pm.pmlosslog" />
+        <activity android:name=".warehouse.wareorderingfirst" />
+        <activity android:name=".warehouse.wareordersecond" />
+        <activity android:name=".warehouse.wareSuccessafterorder" />
+        <activity android:name=".warehouse.warepastorders" />
+        <activity android:name=".pm.pmwareorders" />
+        <activity android:name=".pm.pmfulfill" />
+        <activity android:name=".warehouse.wareorderreceived" />
+        <activity android:name=".pm.pmbillhistory" />
+        <activity android:name=".pm.harvestmapfirst" />
+        <activity android:name=".pm.harvestmapsecond" />
+        <activity android:name=".pm.viewfarms" />
+        <activity android:name=".pm.harvestmapwater" />
+        <activity android:name=".pm.harvestmapdisease" />
+        <activity android:name=".pm.harvestmappest" />
+        <activity android:name=".pm.farmerdetails" />
+        <activity android:name=".pm.farmerdetails2" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAm7IvC5DpVPeKLTeX0DUT8tYOqHRaccrA" />
+
+        <activity android:name=".pm.MapsActivity" />
+        <activity android:name=".pm.harvesthomepage" />
+        <activity android:name=".pm.harvestlistmaps" />
+        <activity android:name=".pm.harvestmenu" />
+        <activity android:name=".pm.viewmapharvestwater" />
+        <activity android:name=".pm.viewfarmdetails" />
+        <activity android:name=".pm.harvestmap" />
+        <activity android:name=".pm.billafterharvest" />
+        <activity android:name=".pm.paybillafterharvest" />
+        <activity android:name=".pm.editfarmdata" />
+        <activity android:name=".pm.locationedit" />
+        <activity android:name=".admin.tablekioskwise" />
+        <activity android:name=".minuss" />
+        <activity android:name=".damages" />
+        <activity android:name=".damagehistory" />
+        <activity android:name=".ratechange"></activity>
+    </application>
+
+</manifest>
