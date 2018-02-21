@@ -42,6 +42,7 @@ public class Stocktakingfirst extends ActionBarActivity {
     int cashsum=0;
     int op=0;
     TextView tv33;
+    int yopbal;
     int cl=0;
     int cl2;
   //  int diff=0;
@@ -58,22 +59,24 @@ public class Stocktakingfirst extends ActionBarActivity {
         SimpleDateFormat time = new SimpleDateFormat("hh:mm:ss");
         SharedPreferences prefs3 = getSharedPreferences("kioskname", MODE_PRIVATE);
         kioskid = prefs3.getString("kname", null);
-        opbal=prefs3.getString("openbal",null);
+        opbal=prefs3.getString("yopbal",null);
+        yopbal=Integer.parseInt(opbal);
+
         ti=prefs3.getString("time",null);
   //      out=prefs3.getString("outt",null);
         rate= prefs3.getString("rate",null);
         n2=Integer.parseInt(rate);
 //        o=Integer.parseInt(out);
         Firebase.setAndroidContext(this);
-        rl = (RotateLoading) findViewById(R.id.rotateloading);
-rl.start();
+       // rl = (RotateLoading) findViewById(R.id.rotateloading);
+//rl.start();
         ti= ti.replace(":", "");
         TextView tv = (TextView)findViewById(R.id.textView3);
         t=Integer.parseInt(ti);
      //   System.out.println("iiiiiiiiiiiiiiii" +t);
         op=Integer.parseInt(opbal);
         tv33= (TextView) findViewById(R.id.textView33);
-        tv.setText("Opening Balance was : "+ opbal);
+     //   tv.setText("Opening Balance was : "+ opbal);
         tyme = time.format(new Date());
         SimpleDateFormat mon = new SimpleDateFormat("MM");
         SimpleDateFormat year = new SimpleDateFormat("yyyy");
@@ -83,46 +86,35 @@ rl.start();
         String da = day.format(new Date());
         date = da + "-" + month + "-" + yea;
 
-        btnSignIn = (ActionProcessButton) findViewById(R.id.sign);
-        btnSignIn.setEnabled(false);
+     //   btnSignIn = (ActionProcessButton) findViewById(R.id.sign);
+       // btnSignIn.setEnabled(false);
         url = "https://kioskfarm.firebaseio.com/SALES/" + kioskid + "/" + yea + "/" + month + "/" + da;
-        //r();
-        calc();
+        r();
+
 
 
 
     }
-   /* public void r()
+   public void r()
     {
         SimpleDateFormat mon = new SimpleDateFormat("dd/MM/yyyy");
 
         final String date = mon.format(new Date());
-        final Firebase ref = new Firebase("https://kioskfarm.firebaseio.com/deposits/" +kioskid);
+        final Firebase ref = new Firebase("https://kioskfarm.firebaseio.com/KIOSKS/");
         //Value event listener for realtime data update
 
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot usersSnapshot) {
-                String amstr="";
-                int amount;
+
 
 
                 for (DataSnapshot userSnapshot : usersSnapshot.getChildren()) {
-                    deposits sale = userSnapshot.getValue(deposits.class);
-                    String d= sale.getDate();
-                    String kis= sale.getKid();
-                    String time=sale.getTime();
-                    time=time.replace(":","");
-                    dt=Integer.parseInt(time);
-
-                    if (d.equals(date) && kis.equals(kioskid)) {
-                        amstr = sale.getAmount();
-                        amount = Integer.parseInt(amstr);
-                        if (dt>t) {
-
-                            deposit = deposit + amount;
-                        }
-                        d2=d2+amount;
+                    kioskmake sale = userSnapshot.getValue(kioskmake.class);
+                    String k = sale.getPass();
+                    if (k.equals(kioskid))
+                    {
+                        deposit= Integer.parseInt(sale.getDiff());
                     }
                   //  tost(sum,c,cash,card,paytm);
                 }
@@ -135,10 +127,10 @@ rl.start();
             }
         });
 
-    }*/
+    }
     public void check(View view) {
         cl= (sum*n2) +op -deposit;
-        cl2=(cashsum*n2)+op-deposit;
+        cl2=(cashsum*n2)+op;
 
         //System.out.println("hiiiiiiiiiiiiiii"+cl + " " + sum + " " + op + " " +deposit);
        // EditText ed = (EditText) findViewById(R.id.closingbalance);
@@ -233,12 +225,12 @@ rl.start();
                     kiosksalesdaily k = userSnapshot.getValue(kiosksalesdaily.class);
                     String date = k.getTime();
                     if (date.equals(mond)) {
-                        userSnapshot.getRef().child("amount").setValue((Integer.toString(sum*n2 + closing)));
+                        userSnapshot.getRef().child("amount").setValue((Integer.toString(sum*n2)));
                         f = 0;
                     }
                 }
                 if (f == 1) {
-                    order.setAmount(Integer.toString(sum*n2 + closing));
+                    order.setAmount(Integer.toString(sum*n2));
                     order.setTime(mond);
 
                     ref.push().setValue(order);
@@ -250,13 +242,13 @@ rl.start();
                 System.out.println("The read failed: " + firebaseError.getMessage());
             }
         });
-      //  in.putExtra("diff", Integer.toString(diff));
+        in.putExtra("diff", cl2);
         startActivity(in);
     }
 
     int f = 1;
 
-    public void move2() {
+   /* public void move2() {
         Intent in = new Intent(this, Successafterstock.class);
         final Firebase ref = new Firebase("https://kioskfarm.firebaseio.com/CLOSINGBALANCE/" + kioskid);
         final kiosksalesdaily order = new kiosksalesdaily();
@@ -291,14 +283,11 @@ rl.start();
      //   in.putExtra("diff", Integer.toString(diff));
         startActivity(in);
     }
-
+*/
     public void read() {
         sum=0;
-
+        cashsum=0;
         final Firebase ref = new Firebase(url);
-        //Value event listener for realtime data update
-        final StringBuilder finalTotal = new StringBuilder();
-        final StringBuilder finalTotal2 = new StringBuilder();
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot usersSnapshot) {
@@ -308,13 +297,11 @@ rl.start();
                 for (DataSnapshot userSnapshot : usersSnapshot.getChildren()) {
                     kiosksalesdaily sale = userSnapshot.getValue(kiosksalesdaily.class);
 
-                    finalTotal.append(sale.getAmount());
+
                     amstr = sale.getAmount();
                     amount = Integer.parseInt(amstr);
-                    String tt= sale.getTime();
-                    tt=tt.replace(":", "");
-                    int ts= Integer.parseInt(tt);
-                    if (ts>t) {
+
+
                         sum = sum + amount;
                         if(sale.getPaymentmode().toString().equals("cash")) {
                             cashsum=cashsum+amount;
@@ -322,10 +309,10 @@ rl.start();
                         // tost(sum);
 
 
-                }
+
                 cl2=(cashsum*n2)+op-deposit;
-                tv33.setText("Closing Balance: " +cl2);
-                rl.stop();
+               // tv33.setText("Closing Balance: " +cl2);
+                //rl.stop();
                 move();
             }
 

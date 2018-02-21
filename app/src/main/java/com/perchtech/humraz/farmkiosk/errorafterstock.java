@@ -37,10 +37,13 @@ public class errorafterstock extends ActionBarActivity {
     EditText ed2;
     int op=0;
     int deposit=0;
+    String d2;
     int deposit2=0;
     String yopbal;
     ActionProcessButton btnSignIn;
     String rate;
+    String stockkk;
+
     int n2;
     RotateLoading rl;
     @Override
@@ -61,7 +64,8 @@ public class errorafterstock extends ActionBarActivity {
         yopbal= prefs3.getString("yopbal",null);
         n2=Integer.parseInt(rate);
         SimpleDateFormat day = new SimpleDateFormat("dd");
-
+        Intent in = getIntent();
+        stockkk=in.getStringExtra("st");
         String opbal=prefs3.getString("openbal",null);
         op =Integer.parseInt(opbal);
         //      out=prefs3.getString("outt",null);
@@ -73,48 +77,71 @@ public class errorafterstock extends ActionBarActivity {
         String yea= year.format(new Date());
         String da= day.format(new Date());
         date=da+"-"+month+"-"+yea;
+        d2=da+"/"+month+"/"+yea;
         Firebase.setAndroidContext(this);
        btnSignIn = (ActionProcessButton) findViewById(R.id.SIG);
         btnSignIn.setEnabled(false);
         url="https://kioskfarm.firebaseio.com/SALES/" + kioskid+"/"+yea+"/"+month+"/"+da;
-        read();
+        r();
 
     }
-   /* public void r()
+
+
+
+    public void move2() {
+        Intent in = new Intent(this, Successafterstock.class);
+        SimpleDateFormat mon = new SimpleDateFormat("ddMMyyyy");
+        final String mond = mon.format(new Date());
+        Firebase ref = new Firebase("https://kioskfarm.firebaseio.com/opbal&stock/"+kioskid+"/"+mond);
+        final kiosksalesdaily order = new kiosksalesdaily();
+
+
+
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot usersSnapshot) {
+                for (DataSnapshot userSnapshot : usersSnapshot.getChildren()) {
+                    kioskmake k = userSnapshot.getValue(kioskmake.class);
+                    String date = k.getIndate();
+                    if (date.equals(d2)) {
+                        userSnapshot.getRef().child("openingbal").setValue(Integer.toString((cash*n2)+Integer.parseInt(yopbal)));
+                        userSnapshot.getRef().child("stock").setValue(stockkk);                      //  f = 0;
+                    }
+                }
+                btnSignIn.setEnabled(true);
+
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                System.out.println("The read failed: " + firebaseError.getMessage());
+            }
+        });
+        //   in.putExtra("diff", Integer.toString(diff));
+        //   startActivity(in);
+    }
+
+    public void r()
     {
         SimpleDateFormat mon = new SimpleDateFormat("dd/MM/yyyy");
 
         final String date = mon.format(new Date());
-        final Firebase ref = new Firebase("https://kioskfarm.firebaseio.com/deposits/"+kioskid);
+        final Firebase ref = new Firebase("https://kioskfarm.firebaseio.com/KIOSKS/");
         //Value event listener for realtime data update
 
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot usersSnapshot) {
-                String amstr="";
-                int amount;
 
-
-                for (DataSnapshot userSnapshot : usersSnapshot.getChildren()) {
-                    deposits sale = userSnapshot.getValue(deposits.class);
-                    String d= sale.getDate();
-                    String kis= sale.getKid();
-                    String time =sale.getTime();
-                    if (d.equals(date) && kis.equals(kioskid)) {
-                        time=time.replace(":","");
-                        dt=Integer.parseInt(time);
-
-                        if (d.equals(date) && kis.equals(kioskid)) {
-                            amstr = sale.getAmount();
-                            amount = Integer.parseInt(amstr);
-                            deposit2=deposit2+amount;
-                            if (dt>t) {
-
-                                deposit = deposit + amount;
-                            }
-                    }}
-                    //  tost(sum,c,cash,card,paytm);
-                }
+                    for (DataSnapshot userSnapshot : usersSnapshot.getChildren()) {
+                        kioskmake sale = userSnapshot.getValue(kioskmake.class);
+                        String k = sale.getPass();
+                        if (k.equals(kioskid))
+                        {
+                            deposit= Integer.parseInt(sale.getDiff());
+                        }
+                        //  tost(sum,c,cash,card,paytm);
+                    }
                 read();
             }
 
@@ -124,7 +151,7 @@ public class errorafterstock extends ActionBarActivity {
             }
         });
 
-    }*/
+    }
     public void YO(View view)
     {
         Intent in = new Intent(this, newlogin.class);
@@ -188,7 +215,7 @@ public class errorafterstock extends ActionBarActivity {
 
                 }
 
-                btnSignIn.setEnabled(true);
+
             }
 
             @Override
@@ -243,25 +270,26 @@ public class errorafterstock extends ActionBarActivity {
         TextView tv555=(TextView) findViewById(R.id.tv555);
         TextView tv5=(TextView) findViewById(R.id.tv5);
         TextView tv55=(TextView) findViewById(R.id.tv55);
-        String a= String.format("%-38s %-5s","Opening Balance(Rs): ",Integer.toString(Integer.parseInt(yopbal)));
+        String a= String.format(Integer.toString(Integer.parseInt(yopbal)));
         //a.replace(" ", "&nbsp");
         tv122.setText((a));
-        String b= String.format("%-38s %-5s","Cash Deposit(Rs): ", Integer.toString(deposit2));
+        String b= String.format(Integer.toString(deposit));
         //b.replace(" ", "&nbsp");
         tv12.setText((b));
       //  String c =String.format("%-38s %-5s","Total Coconuts Sold (No. of Nuts):", Integer.toString(sum));
        // c.replace(" ", "&nbsp");
         //tv1.setText(c);
-        String d= String.format("%-38s %-5s","Total Sales: "+y, Integer.toString(sum *n));
+        String d= String.format( Integer.toString(sum *n));
         //d.replace(" ", "&nbsp");
         tv11.setText((d));
 
        // tv2.setText(String.format("%-38s %-5s","No of Transactions: ",Integer.toString(cc)));
-        tv3.setText(String.format("%-38s %-5s","Cash Sales: "+y, Integer.toString(ca*n)));
-        tv4.setText(String.format("%-38s %-5s","Card Sales: "+y, Integer.toString(car*n)));
-        tv5.setText(String.format("%-38s %-5s","Pay-Tm Sales: "+y, Integer.toString(pay*n)));
-        tv555.setText(String.format("%-38s %-5s","Other Payments/NIYO: "+y, Integer.toString(other*n)));
-        tv55.setText(String.format("%-38s %-5s","Closing Balance(Rs): ", Integer.toString((cash*n2)-deposit+op)));
+        tv3.setText(String.format( Integer.toString(ca*n)));
+        tv4.setText(String.format(Integer.toString(car*n)));
+        tv5.setText(String.format( Integer.toString(pay*n)));
+        tv555.setText(String.format( Integer.toString(other*n)));
+        tv55.setText(String.format(Integer.toString((ca*n2)-deposit+Integer.parseInt(yopbal))));
+        move2();
 
     }
 

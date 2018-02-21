@@ -206,34 +206,39 @@ error();
                 sale.setPaymentmode(p);
                 sale.setTime(time);
                 sale.setAmount(amount);
+                ref.push().setValue(sale);
                 if (!p.equals("cash")) {
 
                     sale.setTime(time);
                     sale.setPaymentmode("cash");
                     sale.setAmount("0");
+                    ref.push().setValue(sale);
                 }
                 //Storing values to firebase
-                ref.push().setValue(sale);
+
                 if (!p.equals("paytm")) {
                     sale.setPaymentmode("paytm");
                     sale.setTime(time);
                     sale.setAmount("0");
-                }
                     ref.push().setValue(sale);
+                }
+
                 if (!p.equals("card")) {
                     sale.setPaymentmode("card");
                     sale.setTime(time);
                     sale.setAmount("0");
+                    ref.push().setValue(sale);
                 }
-                ref.push().setValue(sale);
+
                 if (!p.equals("other")) {
                     sale.setPaymentmode("other");
                     sale.setTime(time);
 
                     sale.setAmount("0");
+                    ref.push().setValue(sale);
                 }
                 //Storing values to firebase
-                ref.push().setValue(sale);
+
                 }
 
 

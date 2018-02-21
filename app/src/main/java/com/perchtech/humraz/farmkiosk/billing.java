@@ -39,6 +39,7 @@ String number="0";
 
             R.drawable.exit,
             R.drawable.egg,
+            R.drawable.deposit,
 
 
 
@@ -51,7 +52,7 @@ String number="0";
             R.string.sale,
             R.string.sess,
             R.string.damages,
-
+            R.string.depsi,
 
 
 
@@ -96,8 +97,8 @@ String number="0";
         bmb.setButtonEnum(ButtonEnum.Ham);
         bt=(Button) findViewById(R.id.minus);
         bt.setEnabled(false);
-        bmb.setPiecePlaceEnum(PiecePlaceEnum.HAM_3);
-        bmb.setButtonPlaceEnum(ButtonPlaceEnum.HAM_3);
+        bmb.setPiecePlaceEnum(PiecePlaceEnum.HAM_4);
+        bmb.setButtonPlaceEnum(ButtonPlaceEnum.HAM_4);
         for (int i = 0; i < bmb.getPiecePlaceEnum().pieceNumber(); i++) {
             HamButton.Builder builder = new HamButton.Builder()
                     .normalTextRes(getString())
@@ -116,6 +117,10 @@ String number="0";
                             }
                             if (index == 2) {
                                 damages(index);
+
+                            }
+                            if (index == 3) {
+                                deposit(index);
 
                             }
 
@@ -423,6 +428,12 @@ public void damages(int pos) {
     in.putExtra("stock", st);
     startActivity(in);
 }
+    public void deposit(int pos) {
+
+        Intent in = new Intent(this, depositnewhomepage.class);
+        //in.putExtra("stock", st);
+        startActivity(in);
+    }
     /*public void orderingg(int pos)
     {
         // Toast.makeText(this, Integer.toString(pos), Toast.LENGTH_LONG).show();

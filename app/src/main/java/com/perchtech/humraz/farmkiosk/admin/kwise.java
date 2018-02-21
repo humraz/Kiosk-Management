@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.codetroopers.betterpickers.datepicker.DatePickerBuilder;
 import com.codetroopers.betterpickers.datepicker.DatePickerDialogFragment;
 import com.dd.processbutton.ProcessButton;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
@@ -66,7 +67,7 @@ String rate;
         Date d = new Date();
         String dayOfTheWeek = sdf.format(d);
         kid= getIntent().getStringExtra("kid");
-        Toast.makeText(this, kid ,Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, kid ,Toast.LENGTH_LONG).show();
         SimpleDateFormat mon = new SimpleDateFormat("dd MMM");
         String date = mon.format(new Date());
 
@@ -361,10 +362,18 @@ String rate;
         in.putExtra("no",n);
         startActivity(in);
     }
+    public void table2(View view)
+    {
+        Intent in = new Intent(this , tablewise2.class);
+        in.putExtra("kid",kid);
+        in.putExtra("no",n);
+        startActivity(in);
+    }
+    int n2;
     public void no(View view)
     {
 
-        int n2= Integer.parseInt(rate);
+        n2= Integer.parseInt(rate);
         Button bt = (Button)findViewById(R.id.button7);
 
         if (f==1)
@@ -388,7 +397,7 @@ String rate;
     {
         // rl.stop();
         String  y=" No.";
-
+        n2= Integer.parseInt(rate);
         // setContentView(R.layout.activity_errorafterstock);
         if (n==1)
             y=" No.";
@@ -400,13 +409,15 @@ String rate;
         TextView tv1=(TextView) findViewById(R.id.tv1);
         TextView tv11=(TextView) findViewById(R.id.tv11);
         TextView tv2=(TextView) findViewById(R.id.tv2);
+        TextView tv7=(TextView) findViewById(R.id.tv7);
         TextView tv111=(TextView) findViewById(R.id.textView450);
         TextView tv3=(TextView) findViewById(R.id.tv3);
         TextView tv4=(TextView) findViewById(R.id.tv4);
         TextView tv555=(TextView) findViewById(R.id.tv555);
         TextView tv5=(TextView) findViewById(R.id.tv5);
-        TextView tv55=(TextView) findViewById(R.id.tv55);
-        String a= String.format("%-38s %-5s","Closing Balance(Rs): ",Integer.toString(op));
+        TextView tv55=(TextView) findViewById(R.id.textView777);
+
+        String a= String.format("%-38s %-5s","Closing Balance(Rs): ",Integer.toString((ca*n2)-deposit2+Integer.parseInt(yopbal)));
         String av= String.format("%-38s %-5s","Opening Balance(Rs): ",yopbal);
         //a.replace(" ", "&nbsp");
         //a.replace(" ", "&nbsp");
@@ -422,15 +433,18 @@ String rate;
         tv11.setText((d));
         tv111.setText((av));
 
-        tv2.setText(String.format("%-38s %-5s","No of Transactions: ",Integer.toString(cc)));
+      //  tv2.setText(String.format("%-38s %-5s","Opening Stock(Units):", ystock));
         tv3.setText(String.format("%-38s %-5s","Cash Sales: "+y, Integer.toString(ca*n)));
         tv4.setText(String.format("%-38s %-5s","Card Sales: "+y, Integer.toString(car*n)));
         tv5.setText(String.format("%-38s %-5s","Pay-Tm Sales: "+y, Integer.toString(pay*n)));
-        tv555.setText(String.format("%-38s %-5s","Other Payments/NIYO: "+y, Integer.toString(other*n)));
-     //   tv55.setText(String.format("%-38s %-5s","Closing Balance(Rs): ", Integer.toString((cash*30)-deposit+op)));
+        tv555.setText(String.format("%-38s %-5s","Other/NIYO: "+y, Integer.toString(other*n)));
+        tv2.setText(String.format("%-38s %-5s","Opening Stock(Units): ", ystock));
+      tv7.setText(String.format("%-38s %-5s","Closing Stock(Units): ", stock));
+       // Toast.makeText(this, stock + ystock ,Toast.LENGTH_LONG).show();
 
     }
-
+String  ystock;
+    String stock;
 public void b(View view)
 {
     Intent in = new Intent(this, cashflow.class);
@@ -450,7 +464,9 @@ public void b(View view)
                     if(k.equals(kid)){
                     String amount = sale.getLoggedin();
                        opbal=sale.getOpeningbal();
+                        ystock=sale.getYeststock();
                          yopbal=sale.getYestopeningbal();
+                        stock= sale.getStock();
                         pref3.edit().putString("yopbal",yopbal).commit();
                         op=Integer.parseInt(opbal);
                         time=sale.getOuttime();

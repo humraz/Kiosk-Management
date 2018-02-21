@@ -1,6 +1,6 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:layout_height="match_parent" android:paddingLeft="10dp"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -55,17 +55,29 @@
             android:background="@color/blue_btn_bg_color">
 
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/tkzjdkav122"
+                android:layout_marginTop="2dp"
 
+                android:text="Opening Balance"
+                android:textSize="17sp"
+                android:paddingLeft="10dp" />
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:id="@+id/tv122"
                 android:layout_marginTop="2dp"
 
                 android:text="No Data"
-                android:textSize="17sp" />
+                android:textSize="17sp"
+                android:layout_gravity="right"
+                android:paddingLeft="5dp"
+                android:paddingRight="10dp" />
         </android.support.v7.widget.CardView>
         <android.support.v7.widget.CardView
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
@@ -79,16 +91,28 @@
 
 
 
-
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/tksdfzjdkav122"
+                android:layout_marginTop="2dp"
+
+                android:text="Cash Deposit(Rs)"
+                android:textSize="17sp"
+                android:paddingLeft="10dp" />
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:id="@+id/tv12"
                 android:layout_marginTop="2dp"
 
                 android:text="No Data"
-                android:textSize="17sp" />
+                android:textSize="17sp"
+                android:layout_gravity="right"
+                android:paddingLeft="5dp"
+                android:paddingRight="10dp" />
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
@@ -100,13 +124,26 @@
             card_view:cardCornerRadius="4dp"
             android:background="@color/blue_btn_bg_color">
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/tkav122"
+                android:layout_marginTop="2dp"
+
+                android:text="Total Sales: No"
+                android:textSize="17sp"
+                android:paddingLeft="10dp" />
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:id="@+id/tv11"
                 android:text="No Data"
-                android:textSize="17sp" />
+                android:textSize="17sp"
+                android:layout_gravity="right"
+                android:paddingLeft="5dp"
+                android:paddingRight="10dp" />
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
@@ -118,13 +155,26 @@
             card_view:cardCornerRadius="4dp"
             android:background="@color/blue_btn_bg_color">
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/tkzj122"
+                android:layout_marginTop="2dp"
+
+                android:text="Cash Sales: No."
+                android:textSize="17sp"
+                android:paddingLeft="10dp" />
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:id="@+id/tv3"
                 android:text="No Data"
-                android:textSize="17sp" />
+                android:textSize="17sp"
+                android:layout_gravity="right"
+                android:paddingLeft="5dp"
+                android:paddingRight="10dp" />
         </android.support.v7.widget.CardView>
         <android.support.v7.widget.CardView
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
@@ -135,13 +185,26 @@
             card_view:cardCornerRadius="4dp"
             android:background="@color/blue_btn_bg_color">
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/tkzjdka22"
+                android:layout_marginTop="2dp"
+
+                android:text="Card Sales: No."
+                android:textSize="17sp"
+                android:paddingLeft="10dp" />
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:id="@+id/tv4"
                 android:text="No Data"
-                android:textSize="17sp" />
+                android:layout_gravity="right"
+                android:textSize="17sp"
+                android:paddingLeft="5dp"
+                android:paddingRight="10dp" />
         </android.support.v7.widget.CardView>
         <android.support.v7.widget.CardView
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
@@ -152,13 +215,26 @@
             card_view:cardCornerRadius="4dp"
             android:background="@color/blue_btn_bg_color">
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/tkfdkav122"
+                android:layout_marginTop="2dp"
+
+                android:text="Pay-Tm Sales: No."
+                android:textSize="17sp"
+                android:paddingLeft="10dp" />
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:id="@+id/tv5"
                 android:text="No Data"
-                android:textSize="17sp" />
+                android:textSize="17sp"
+                android:layout_gravity="right"
+                android:paddingLeft="5dp"
+                android:paddingRight="10dp" />
         </android.support.v7.widget.CardView>
         <android.support.v7.widget.CardView
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
@@ -169,13 +245,26 @@
             card_view:cardCornerRadius="4dp"
             android:background="@color/blue_btn_bg_color">
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/tkzjdkav6565122"
+                android:layout_marginTop="2dp"
+
+                android:text="Other/Niyo: No."
+                android:textSize="17sp"
+                android:paddingLeft="10dp" />
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:id="@+id/tv555"
                 android:text="No Data"
-                android:textSize="17sp" />
+                android:textSize="17sp"
+                android:layout_gravity="right"
+                android:paddingLeft="5dp"
+                android:paddingRight="10dp" />
         </android.support.v7.widget.CardView>
         <android.support.v7.widget.CardView
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
@@ -186,13 +275,26 @@
             card_view:cardCornerRadius="4dp"
             android:background="@color/blue_btn_bg_color">
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/tkzjdkavlasld122"
+                android:layout_marginTop="2dp"
+
+                android:text="Closing Balance(Rs):"
+                android:textSize="17sp"
+                android:paddingLeft="10dp" />
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:id="@+id/tv55"
                 android:text="No Data"
-                android:textSize="17sp" />
+                android:layout_gravity="right"
+                android:textSize="17sp"
+                android:paddingLeft="5dp"
+                android:paddingRight="10dp" />
         </android.support.v7.widget.CardView>
     </LinearLayout>
 

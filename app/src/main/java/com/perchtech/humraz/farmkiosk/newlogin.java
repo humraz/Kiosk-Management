@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -67,7 +68,11 @@ public class newlogin extends AppCompatActivity {
         btnSignIn = (ActionProcessButton) findViewById(R.id.login);
         btnSignIn.setEnabled(false);
         Firebase.setAndroidContext(this);
-        read();
+       //
+        // read();
+        read3();
+      //  write();
+        read2();
         boolean c= checkLocationPermission();
         if (c)
         {
@@ -189,6 +194,73 @@ public class newlogin extends AppCompatActivity {
         }
 
     }
+
+    public void read2() {
+        final SimpleDateFormat daaaay = new SimpleDateFormat("dd/MM/yyyy");
+        final String month = daaaay.format(new Date());
+        final Firebase ref = new Firebase("https://kioskfarm.firebaseio.com/KIOSKS/");
+        //Value event listener for realtime data update
+
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot usersSnapshot) {
+
+
+                for (DataSnapshot userSnapshot : usersSnapshot.getChildren()) {
+                    kioskmake user1 = userSnapshot.getValue(kioskmake.class);
+
+                    String passs = user1.getPost();
+                    String name = user1.getPass();
+                    String a= user1.getIndate();
+                    String fda= user1.getFlagdate();
+
+
+                    if (fda.equals(month))
+                    {
+
+                    }else
+                    {
+                        userSnapshot.getRef().child("yestopeningbal").setValue(user1.getOpeningbal().toString());
+                        userSnapshot.getRef().child("flagdate").setValue(month);
+                        userSnapshot.getRef().child("diff").setValue("0");
+
+                        userSnapshot.getRef().child("yeststock").setValue(user1.getStock().toString());
+                        //userSnapshot.getRef().child("openingbal").setValue(user1.getOpeningbal().toString());
+                      //  userSnapshot.getRef().child("stock").setValue(user1.getOpeningbal().toString());
+                        Firebase ref = new Firebase("https://kioskfarm.firebaseio.com/opbal&stock/"+name+"/"+month.replace("/",""));
+
+                        //Getting values to store
+
+                        //Creating Person object
+                        kioskmake sale= new kioskmake();
+
+                        //Adding values
+                        sale.setOpeningbal(user1.getOpeningbal().toString());
+
+                        sale.setStock(user1.getStock().toString());
+                        sale.setYeststock(user1.getStock().toString());
+                        sale.setYestopeningbal(user1.getOpeningbal().toString());
+
+                        sale.setIndate(month);
+
+                        //Storing values to firebase
+                        ref.push().setValue(sale);
+
+                    }
+
+                }
+
+//                btnSignIn.setEnabled(true);
+                read();
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                System.out.println("The read failed: " + firebaseError.getMessage());
+            }
+        });
+
+    }
     public void read() {
 
         final Firebase ref = new Firebase("https://kioskfarm.firebaseio.com/KIOSKS/");
@@ -247,13 +319,55 @@ public class newlogin extends AppCompatActivity {
         });
 
     }
+    String pp;
+    public void read3() {
+
+        final Firebase ref = new Firebase("https://kioskfarm.firebaseio.com/VERSION/");
+        //Value event listener for realtime data update
+
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot usersSnapshot) {
+
+
+                for (DataSnapshot userSnapshot : usersSnapshot.getChildren()) {
+                    kioskmake user1 = userSnapshot.getValue(kioskmake.class);
+
+                        pp=user1.getPass();
+                    if (pp.equals("3.1"))
+                    {
+
+                    }
+                    else
+                    {
+                        new SweetAlertDialog(newlogin.this, SweetAlertDialog.WARNING_TYPE)
+                                .setTitleText("Old Version Detected!")
+                                .setContentText("You are using an old version that is unstable, press ok to update now.")
+                                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                    @Override
+                                    public void onClick(SweetAlertDialog sDialog) {
+                                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.perchtech.humraz.farmkiosk")));                                }
+                                })
+                                .show();
+                    }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                System.out.println("The read failed: " + firebaseError.getMessage());
+            }
+        });
+
+    }
     public void write()
     {
-        Firebase ref = new Firebase("https://kioskfarm.firebaseio.com/warehouseandpmlogins");
+        Firebase ref = new Firebase("https://kioskfarm.firebaseio.com/VERSION/");
         kioskmake person = new kioskmake();
-        person.setPass("pmadmin");
+        person.setPass("3.1");
 
-        person.setPost("12345");
+
 
         ref.push().setValue(person);
 

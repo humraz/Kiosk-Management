@@ -34,7 +34,6 @@ public class kioskhomepage extends AppCompatActivity {
 
 
             R.drawable.board,
-            R.drawable.deposit,
             R.drawable.taabb
 
 
@@ -47,7 +46,7 @@ public class kioskhomepage extends AppCompatActivity {
             R.string.order,
 
             R.string.sale,
-            R.string.depsi,
+
             R.string.depsit
 
 
@@ -94,8 +93,8 @@ tv8.setText("Rate for Kiosk(RS): " +cashdiff);
         tv5.setText("Cash In Hand(Rs.) : " +op);
         BoomMenuButton bmb = (BoomMenuButton) findViewById(R.id.bmb);
         bmb.setButtonEnum(ButtonEnum.Ham);
-        bmb.setPiecePlaceEnum(PiecePlaceEnum.HAM_4);
-        bmb.setButtonPlaceEnum(ButtonPlaceEnum.HAM_4);
+        bmb.setPiecePlaceEnum(PiecePlaceEnum.HAM_3);
+        bmb.setButtonPlaceEnum(ButtonPlaceEnum.HAM_3);
         for (int i = 0; i < bmb.getPiecePlaceEnum().pieceNumber(); i++) {
             HamButton.Builder builder = new HamButton.Builder()
                     .normalTextRes(getString())
@@ -111,10 +110,8 @@ tv8.setText("Rate for Kiosk(RS): " +cashdiff);
                             if (index == 0) {
                                 orderingg(index);
                             }
+
                             if (index == 2) {
-                                depsi(index);
-                            }
-                            if (index == 3) {
                                 depsit(index);
                             }
 
@@ -239,6 +236,9 @@ return true;
 if (name.equals(user1.getPass().toString()))
 {   String stockk= user1.getStock().toString();
     String op = user1.getOpeningbal();
+    int d =Integer.parseInt(user1.getDiff());
+    int c= Integer.parseInt(user1.getOpeningbal());
+    c=c-d;
     TextView tv5= (TextView) findViewById(R.id.textView6);
     TextView tv4= (TextView) findViewById(R.id.textView5);
     tv4.setText("Current Stock(No.): " +stockk);
@@ -288,12 +288,7 @@ if (name.equals(user1.getPass().toString()))
         Intent in = new Intent( this, orderingfirst.class);
         startActivity(in);
     }
-    public void depsi(int pos)
-    {
-        // Toast.makeText(this, Integer.toString(pos), Toast.LENGTH_LONG).show();
-        Intent in = new Intent( this, depositnewhomepage.class);
-        startActivity(in);
-    }
+
     public void depsit(int pos)
     {
         Intent in = new Intent(kioskhomepage.this, kwise.class);

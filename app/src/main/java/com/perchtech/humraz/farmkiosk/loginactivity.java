@@ -279,6 +279,9 @@ public void mo(View view)
 
                     }else
                     {
+                        userSnapshot.getRef().child("diff").setValue("0");
+                        System.out.println("hiiiiii");
+
                         userSnapshot.getRef().child("yestopeningbal").setValue(user1.getOpeningbal().toString());
                         userSnapshot.getRef().child("flagdate").setValue(month);
 

@@ -38,6 +38,8 @@ int t=0;
     int d=0;
     String color;
     int n2=0;
+    int cl2;
+    int yopen;
     String rate;
 int deposit=0;
     @Override
@@ -47,8 +49,8 @@ int deposit=0;
         Firebase.setAndroidContext(this);
         rl = (RotateLoading) findViewById(R.id.rotateloading);
        // amou= getIntent().getStringExtra("amount");
-      //  Intent in = getIntent();
-       // diff= in.getStringExtra("diff");
+        Intent in = getIntent();
+        cl2= in.getIntExtra("diff",0);
         d1=0;
 
 
@@ -66,12 +68,13 @@ int deposit=0;
         ti= ti.replace(":", "");
         t=Integer.parseInt(ti);
         openball=prefs3.getString("openbal",null);
+        yopen= Integer.parseInt(prefs3.getString("yopbal",null));
         open=Integer.parseInt(openball);
 
 
         d=d1+d2;
       //  Toast.makeText(this, d,Toast.LENGTH_LONG).show();
-       // r();
+
         setsales();
 
 
@@ -87,14 +90,11 @@ int deposit=0;
                     String amount = sale.getAmount();
                     // hi(amount);
                    amou = Integer.parseInt(amount);
-                    String tt= sale.getTime();
-                    tt=tt.replace(":", "");
-                    int ts= Integer.parseInt(tt);
-                    if (ts>t) {
+
                         sum = sum + amou;
                         c++;
 
-                    }
+
                 }
                 av = sum / c;
 
@@ -112,8 +112,8 @@ int deposit=0;
                     state= "green";
                 else
                     state ="darkgreen";
-               // modify(state);
-                read();
+                modify(state);
+
             }
 
             @Override
@@ -122,51 +122,8 @@ int deposit=0;
             }
         });
     }
-   /* public void r()
-    {
-        SimpleDateFormat mon = new SimpleDateFormat("dd/MM/yyyy");
 
-        final String date = mon.format(new Date());
-        final Firebase ref = new Firebase("https://kioskfarm.firebaseio.com/deposits/"+us2);
-        //Value event listener for realtime data update
-
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot usersSnapshot) {
-                String amstr="";
-                int amount;
-
-
-                for (DataSnapshot userSnapshot : usersSnapshot.getChildren()) {
-                    deposits sale = userSnapshot.getValue(deposits.class);
-                    String d= sale.getDate();
-                    String kis= sale.getKid();
-                    if (d.equals(date) && kis.equals(us2)) {
-                        String timme=sale.getTime().toString();
-                        timme=timme.replace(":","");
-                        int dt=Integer.parseInt(timme);
-
-                        if (d.equals(date) && kis.equals(us2)) {
-
-                            if (dt>t) {
-                                amstr = sale.getAmount();
-                                amount = Integer.parseInt(amstr);
-                                deposit = deposit + amount;
-                            }}
-                    }
-                    //  tost(sum,c,cash,card,paytm);
-                }
-                setsales();
-            }
-
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-                System.out.println("The read failed: " + firebaseError.getMessage());
-            }
-        });
-
-    }*/
-    public void read() {
+  /*  public void read() {
         sum=0;
         SimpleDateFormat mon = new SimpleDateFormat("MM");
         SimpleDateFormat year = new SimpleDateFormat("yyyy");
@@ -215,7 +172,8 @@ int deposit=0;
             }
         });
 
-    }
+    }*/
+    String stockkk;
     public void modify(final String state) {
         SimpleDateFormat t = new SimpleDateFormat("HH:mm:ss");
         final String time = t.format(new Date());
@@ -230,29 +188,20 @@ int deposit=0;
                     kioskmake user1 = userSnapshot.getValue(kioskmake.class);
                     String passs = user1.getPass();
                     if (passs.equals(us2)) {
+                        stockkk=user1.getStock();
                         userSnapshot.getRef().child("loggedin").setValue("false");
                         userSnapshot.getRef().child("outtime").setValue(time);
                         userSnapshot.getRef().child("indate").setValue(date);
                         userSnapshot.getRef().child("salestatus").setValue(state);
-                      //  userSnapshot.getRef().child("diff").setValue(Integer.toString(d));
-                        userSnapshot.getRef().child("openingbal").setValue(Integer.toString((cashsum*n2)-deposit+open));
-                        System.out.println((cashsum*n2)-deposit+open);
+
+                        userSnapshot.getRef().child("openingbal").setValue(Integer.toString(cl2));
+
 
 
                     }
                 }
                 rl.stop();
-                new SweetAlertDialog(Successafterstock.this, SweetAlertDialog.SUCCESS_TYPE)
-                        .setTitleText("Successfully Logged Out")
-                        .setContentText("")
-                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                            @Override
-                            public void onClick(SweetAlertDialog sDialog) {
-                                move();
-
-                            }
-                        })
-                        .show();
+              move();
 
             }
 
@@ -264,7 +213,9 @@ int deposit=0;
     }
 
     public void move() {
+        System.out.println("yoloy"+ stockkk);
         Intent in = new Intent(this, errorafterstock.class);
+        in.putExtra("st",stockkk);
         startActivity(in);
     }
 

@@ -17,7 +17,9 @@ public class kioskmake {
     private String openingbal;
     private String yestopeningbal;
     private String yeststock;
+
     private String diff;
+
 private String rate;
 
     long stackId;

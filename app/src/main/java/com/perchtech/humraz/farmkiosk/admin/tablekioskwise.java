@@ -1,5 +1,6 @@
 package com.perchtech.humraz.farmkiosk.admin;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -28,7 +29,7 @@ import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter;
 public class tablekioskwise extends AppCompatActivity {
    // private static final String[][] DATA_TO_SHOW = { { "This", "is", "a", "test" },
         //    { "and", "a", "second", "test" } };
-   private static final String[][] DATA_TO_SHOW = new String[9][8];
+   private static final String[][] DATA_TO_SHOW = new String[11][11];
     String kid;
     int sum = 0;
     int cash=0;
@@ -52,12 +53,14 @@ public class tablekioskwise extends AppCompatActivity {
     TextView tv2;
     int deposit=0;
     int d=0;
-    private static final String[] TABLE_HEADERS = { "Date", "Cash", "Card", "Pay-Tm","Other","Deposits", "Total sales" ,};
+    private static final String[] TABLE_HEADERS = { "Date", "Cash", "Card", "Pay-Tm","Other","Deposits", "Total sales" };
 
     int deposit2=0;
     String  url;
+    String  url2;
     TableView<String[]> tableView;
     int l=0;
+    String datt3;
     int y=0;
     int depooo=0;
     String yopbal;
@@ -99,12 +102,18 @@ public class tablekioskwise extends AppCompatActivity {
             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
             Calendar cal = Calendar.getInstance();
             cal.add(Calendar.DATE, -l);
-           String datt= dateFormat.format(cal.getTime());
+            String datt= dateFormat.format(cal.getTime());
 
             DateFormat dateFormat3 = new SimpleDateFormat("dd/MM/yyyy");
             Calendar cal3 = Calendar.getInstance();
             cal3.add(Calendar.DATE, -l);
-            String datt3= dateFormat3.format(cal3.getTime());
+            datt3= dateFormat3.format(cal3.getTime());
+
+
+            DateFormat dateFormat4 = new SimpleDateFormat("ddMMyyyy");
+            Calendar cal4 = Calendar.getInstance();
+            cal3.add(Calendar.DATE, -l);
+            String datt4= dateFormat4.format(cal4.getTime());
 
             DateFormat dateFormat2 = new SimpleDateFormat("dd MMM");
             Calendar cal2 = Calendar.getInstance();
@@ -115,8 +124,11 @@ public class tablekioskwise extends AppCompatActivity {
 
 
             url="https://kioskfarm.firebaseio.com/SALES/" + kid+"/"+datt;
+            url2="https://kioskfarm.firebaseio.com/opbal&stock/"+kid+"/"+datt4;
+
             read(url);
-            r(datt3);
+       //   r(datt3);
+       //    read2(url2);
 
         }
         tableView.setDataAdapter(new SimpleTableDataAdapter(this, DATA_TO_SHOW));
@@ -173,6 +185,7 @@ else
                 depooo++;
                 deposit2=0;
 
+           // read2(url2);
             }
 
             @Override
@@ -182,40 +195,45 @@ else
         });
 
     }
-    public void checkopenks() {
-        final Firebase ref = new Firebase("https://kioskfarm.firebaseio.com/KIOSKS/");
+    int opball=0;
+    int opstock=0;
+    int yopball=0;
+    int ystock=0;
+    public void read2(String url3) {
+        final Firebase ref = new Firebase(url3);
         //Value event listener for realtime data update
-        final int[] count = {0};
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot usersSnapshot) {
                 for (DataSnapshot userSnapshot : usersSnapshot.getChildren()) {
                     kioskmake sale = userSnapshot.getValue(kioskmake.class);
-                    String k= sale.getPass();
-                    if(k.equals(kid)){
-                        String amount = sale.getLoggedin();
-                        opbal=sale.getOpeningbal();
-                        op=Integer.parseInt(opbal);
-                        time=sale.getOuttime();
-                        time=time.replace(":","");
-                        // hi(amount);
-                        if (amount.equals("true"))
-                        {
-                            tv2.setText(" Kiosk Currently Open.");
-                            //tv45.setText("Opening Bal:(Rs) "+opbal);
-
-                        }
-                        else
-                        {
-                            tv2.setText("Kiosk is Currently Closed. ");
-                            //tv45.setText("Opening Bal:(Rs) "+opbal);
 
 
-                        }
-                    }
+                        opball= Integer.parseInt(sale.getOpeningbal());
+                         opstock =Integer.parseInt(sale.getStock());
+                         yopball=Integer.parseInt(sale.getYestopeningbal());
+                        ystock =Integer.parseInt(sale.getYeststock());
+
+
                 }
 
+                if ((opball==0&&opstock==0&&yopball==0&&ystock==0))
+                {
+                    //tost(0, 0, 0, 0, 0, 0);
+                    // Toast.makeText(kwise.this,"No Sales On This Day" ,Toast.LENGTH_LONG).show();
+                    DATA_TO_SHOW[y][7] = "0";
+                    DATA_TO_SHOW[y][8] ="0";
+                    DATA_TO_SHOW[y][9] = "0";
+                    DATA_TO_SHOW[y][10] = "0";
 
+                }
+
+                else {
+                    DATA_TO_SHOW[y][7] = Integer.toString(opball);
+                    DATA_TO_SHOW[y][8] = Integer.toString(opstock);
+                    DATA_TO_SHOW[y][9] = Integer.toString(yopball);
+                    DATA_TO_SHOW[y][10] = Integer.toString(ystock);
+                }
             }
 
 
@@ -317,6 +335,7 @@ else
                 other=0;
                 card=0;
                 sum=0;
+                r(datt3);
             }
 
             @Override

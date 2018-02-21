@@ -9,10 +9,10 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <!-- To auto-complete the email text field in the login form with the user's emails -->
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
 
     <application
         android:allowBackup="true"
@@ -54,7 +54,9 @@
             android:label="@string/title_activity_successafterbilling" />
         <activity
             android:name=".Stocktakingfirst"
-            android:label="@string/title_activity_stocktakingfirst" />
+
+            android:label="@string/title_activity_stocktakingfirst"
+            />
         <activity
             android:name=".Successafterstock"
             android:label="@string/title_activity_successafterstock" />
@@ -166,11 +168,14 @@
         <activity android:name=".pm.paybillafterharvest" />
         <activity android:name=".pm.editfarmdata" />
         <activity android:name=".pm.locationedit" />
-        <activity android:name=".admin.tablekioskwise" />
+        <activity android:name=".admin.tablekioskwise"
+            android:screenOrientation="landscape"/>
         <activity android:name=".minuss" />
         <activity android:name=".damages" />
         <activity android:name=".damagehistory" />
-        <activity android:name=".ratechange"></activity>
+        <activity android:name=".ratechange" />
+        <activity android:name=".admin.tablewise2"
+            android:screenOrientation="landscape"></activity>
     </application>
 
 </manifest>

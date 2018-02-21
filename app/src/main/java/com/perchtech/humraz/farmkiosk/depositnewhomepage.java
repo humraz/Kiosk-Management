@@ -48,7 +48,7 @@ usernamee=prefs3.getString("kname",null);
         Firebase.setAndroidContext(this);
 
     }
-   public void modify()
+   public void modify(final String amount)
    {
 
        final Firebase ref = new Firebase("https://kioskfarm.firebaseio.com/KIOSKS/");
@@ -60,7 +60,22 @@ usernamee=prefs3.getString("kname",null);
                    kioskmake user1 = userSnapshot.getValue(kioskmake.class);
                    String passs = user1.getPass();
                    if (passs.equals(usernamee)) {
-                       userSnapshot.getRef().child("openingbal").setValue(Integer.toString(op));
+                       int o= Integer.parseInt(user1.getOpeningbal());
+                       o=o-Integer.parseInt(amount);
+                       if (o<0)
+                       {
+                           Toast.makeText(depositnewhomepage.this, "You are withdrawing more than available!",Toast.LENGTH_LONG).show();
+                       }
+                       else
+                       {
+                           int depo;
+                           int a=Integer.parseInt(user1.getDiff());
+                           depo=a+Integer.parseInt(amount);
+                           userSnapshot.getRef().child("diff").setValue(depo);
+
+
+                       }
+                     //  userSnapshot.getRef().child("openingbal").setValue(Integer.toString(o));
 
                    }
                }
@@ -101,18 +116,18 @@ usernamee=prefs3.getString("kname",null);
             person.setDate(date);
             person.setTime(time);
             person.setAmount(amount);
-            op=op-Integer.parseInt(amount);
+           // op=op-Integer.parseInt(amount);
             person.setKid(kioskid);
 
             ref.push().setValue(person);
-            modify();
+            modify(amount);
             new SweetAlertDialog(depositnewhomepage.this, SweetAlertDialog.SUCCESS_TYPE)
                     .setTitleText("Deposit has been confirmed")
                     .setContentText("Amount Added On date " + date )
                     .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                         @Override
                         public void onClick(SweetAlertDialog sDialog) {
-                            Intent in  = new Intent( depositnewhomepage.this, kioskhomepage.class);
+                            Intent in  = new Intent( depositnewhomepage.this, billing.class);
                             startActivity(in);
 
                         }

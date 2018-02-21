@@ -36,6 +36,7 @@ int st;
         st=in.getIntExtra("stock",0);
        // find(Integer.toString(st+1));
     }
+    int flag=0;
     public void doo(View view)
     {
 
@@ -46,22 +47,22 @@ int st;
         else {
 
 
-            SimpleDateFormat time = new SimpleDateFormat("HH:mm:ss");
-            String tyme = time.format(new Date());
+            final SimpleDateFormat time = new SimpleDateFormat("HH:mm:ss");
+            final String tyme = time.format(new Date());
             SimpleDateFormat mon = new SimpleDateFormat("MM");
             SimpleDateFormat year = new SimpleDateFormat("yyyy");
             SimpleDateFormat day = new SimpleDateFormat("dd");
-            String month = mon.format(new Date());
-            String yea = year.format(new Date());
-            String da = day.format(new Date());
+            final String month = mon.format(new Date());
+            final String yea = year.format(new Date());
+            final String da = day.format(new Date());
             SharedPreferences prefs3 = getSharedPreferences("kioskname", MODE_PRIVATE);
-            String kioskid = prefs3.getString("kname", null);
-            Firebase ref = new Firebase("https://kioskfarm.firebaseio.com/SALES/" + kioskid + "/" + yea + "/" + month + "/" + da);
+            final String kioskid = prefs3.getString("kname", null);
+           // Firebase ref = new Firebase("https://kioskfarm.firebaseio.com/SALES/" + kioskid + "/" + yea + "/" + month + "/" + da);
 
             //Getting values to store
             EditText ed = (EditText) findViewById(R.id.editText6);
 
-            String s = ed.getText().toString();
+            final String s = ed.getText().toString();
             String sup=s;
             if (s.equals(""))
             {
@@ -69,9 +70,66 @@ int st;
 
             }
             else {
+                final Firebase ref = new Firebase("https://kioskfarm.firebaseio.com/SALES/" + kioskid + "/" + yea + "/" + month + "/" + da);
+                //Value event listener for realtime data update
 
 
-                s = "-" + s;
+
+                ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot usersSnapshot) {
+                        if (usersSnapshot.exists()) {
+                            for (DataSnapshot userSnapshot : usersSnapshot.getChildren()) {
+
+                                kiosksalesdaily ord = userSnapshot.getValue(kiosksalesdaily.class);
+
+
+                                if (ord.getPaymentmode().equals(mode)) {
+                                    String am= ord.getAmount();
+                                    int a = Integer.parseInt(am);
+                                    int b= Integer.parseInt(s);
+                                    int g=a-b;
+                                    if (g<0)
+                                    {
+                                        flag=1;
+                                        Toast.makeText(minuss.this,"You have made "+Integer.toString(a)+" "+mode+ " Sales, You cannot deduct more",Toast.LENGTH_LONG).show();
+                                    }
+                                    else
+                                    {
+                                        flag=0;
+                                        userSnapshot.getRef().child("amount").setValue(Integer.toString(g));
+                                        userSnapshot.getRef().child("time").setValue(tyme);
+                                    }
+
+
+                                }
+                            }
+                            if (flag==0)
+                            {
+                                int so = Integer.parseInt(s);
+                                st = st + so;
+                                find(Integer.toString(st));
+                            }
+
+                        }
+                        else {
+                           Toast.makeText(minuss.this, "You must make atleast one sale to perform this operation",Toast.LENGTH_LONG).show();
+                        }
+
+
+
+
+
+                    }
+
+                    @Override
+                    public void onCancelled(FirebaseError firebaseError) {
+                        System.out.println("The read failed: " + firebaseError.getMessage());
+                    }
+                });
+
+
+             /*   s = "-" + s;
 
                 //Creating Person object
                 kiosksalesdaily sale = new kiosksalesdaily();
@@ -82,10 +140,8 @@ int st;
                 sale.setTime(tyme);
 
                 //Storing values to firebase
-                ref.push().setValue(sale);
-                int so = Integer.parseInt(sup);
-                st = st + so;
-                find(Integer.toString(st));
+                ref.push().setValue(sale);*/
+
             }
         }
 
@@ -102,7 +158,7 @@ int st;
         ca.setBootstrapBrand(DefaultBootstrapBrand.WARNING);
         BootstrapButton d= ( BootstrapButton) findViewById(R.id.other);
         d.setBootstrapBrand(DefaultBootstrapBrand.WARNING);
-        Toast.makeText(this, "Selected CASH" , Toast.LENGTH_LONG).show();
+    //    Toast.makeText(this, "Selected CASH" , Toast.LENGTH_LONG).show();
 
     }
     public void card(View view)
@@ -116,7 +172,7 @@ int st;
         BootstrapButton d= ( BootstrapButton) findViewById(R.id.other);
         d.setBootstrapBrand(DefaultBootstrapBrand.WARNING);
         cash.setBootstrapBrand(DefaultBootstrapBrand.WARNING);
-        Toast.makeText(this, "Selected Card" , Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, "Selected Card" , Toast.LENGTH_LONG).show();
 
     }
     public void paytm(View view)
@@ -130,8 +186,8 @@ int st;
         BootstrapButton d= ( BootstrapButton) findViewById(R.id.other);
         d.setBootstrapBrand(DefaultBootstrapBrand.WARNING);
         // p.setEnabled(false);
-        //ca.setEnabled(false);
-        Toast.makeText(this, "Selected Paytm" , Toast.LENGTH_LONG).show();
+       // //ca.setEnabled(false);
+       // Toast.makeText(this, "Selected Paytm" , Toast.LENGTH_LONG).show();
 
     }
     public void other(View view)
@@ -146,7 +202,7 @@ int st;
         v.setBootstrapBrand(DefaultBootstrapBrand.WARNING);
         // p.setEnabled(false);
         //ca.setEnabled(false);
-        Toast.makeText(this, "Selected other" , Toast.LENGTH_LONG).show();
+       // Toast.makeText(this, "Selected other" , Toast.LENGTH_LONG).show();
 
     }
     public void find(final String sto )
