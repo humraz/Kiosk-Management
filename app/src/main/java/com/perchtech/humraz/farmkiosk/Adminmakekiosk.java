@@ -55,6 +55,7 @@ public class Adminmakekiosk extends ActionBarActivity {
     person.setIndate("3/3/3");
       person.setYestopeningbal("0");
     person.setYeststock("0");
+    person.setE("0");
 
     person.setRate("30");
     person.setPhonenumber(ph);

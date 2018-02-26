@@ -306,13 +306,21 @@
         android:onClick="no"
         android:layout_marginTop="10dp"
         android:layout_gravity="center_horizontal" />
+    <Button
+        android:text="   More Details    "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button9"
+        android:onClick="more"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center_horizontal" />
 
     <com.dd.processbutton.iml.ActionProcessButton
            android:id="@+id/SIG"
            android:layout_width="wrap_content"
 
            android:layout_height="wrap_content"
-           android:text="CONFIRM AND LOG OUT"
+           android:text="GO TO HOMEPAGE"
            android:textColor="@android:color/white"
            android:textSize="18sp"
            custom:pb_colorComplete="@color/green_complete"

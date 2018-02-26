@@ -75,12 +75,12 @@ int deposit=0;
         d=d1+d2;
       //  Toast.makeText(this, d,Toast.LENGTH_LONG).show();
 
-        setsales();
-
+      //  setsales();
+modify("green");
 
     }
 
-    public void setsales() {
+  /*  public void setsales() {
         final Firebase ref = new Firebase("https://kioskfarm.firebaseio.com/CLOSINGBALANCE/" + us2);
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -122,7 +122,7 @@ int deposit=0;
             }
         });
     }
-
+*/
   /*  public void read() {
         sum=0;
         SimpleDateFormat mon = new SimpleDateFormat("MM");
@@ -195,6 +195,7 @@ int deposit=0;
                         userSnapshot.getRef().child("salestatus").setValue(state);
 
                         userSnapshot.getRef().child("openingbal").setValue(Integer.toString(cl2));
+
 
 
 

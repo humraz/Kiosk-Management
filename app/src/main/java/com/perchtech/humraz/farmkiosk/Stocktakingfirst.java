@@ -118,7 +118,8 @@ public class Stocktakingfirst extends ActionBarActivity {
                     }
                   //  tost(sum,c,cash,card,paytm);
                 }
-                calc();
+               // calc();
+                read();
             }
 
             @Override
@@ -212,7 +213,7 @@ public class Stocktakingfirst extends ActionBarActivity {
         });
     }
     public void move() {
-        Intent in = new Intent(this, Successafterstock.class);
+        Intent in = new Intent(this, errorafterstock.class);
         final kiosksalesdaily order = new kiosksalesdaily();
         final Firebase ref = new Firebase("https://kioskfarm.firebaseio.com/CLOSINGBALANCE/" + kioskid);
         SimpleDateFormat mon = new SimpleDateFormat("ddMMyyyy");

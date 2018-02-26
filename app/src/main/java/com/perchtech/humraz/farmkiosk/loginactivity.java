@@ -37,6 +37,9 @@ public class loginactivity extends ActionBarActivity {
     ArrayList<String> times = new ArrayList<String>();
     ArrayList<String> outt = new ArrayList<String>();
     ArrayList<String> yopbal = new ArrayList<String>();
+    ArrayList<String> addst = new ArrayList<String>();
+    ArrayList<String> st = new ArrayList<String>();
+    ArrayList<String> e = new ArrayList<String>();
     String usernamee;
     ArrayList<String> rate = new ArrayList<String>();
 
@@ -173,7 +176,7 @@ String openbal;
         for (int i = 0; i < username.size(); i++) {
             String us2 = username.get(i);
             String passs2 = pass.get(i);
-            if (us2.equals(usernamee) && passs.equals(passs2))
+            if (us2.equalsIgnoreCase(usernamee) && passs.equalsIgnoreCase(passs2))
 
             {
                 SharedPreferences prefs3 = null;
@@ -185,7 +188,11 @@ String openbal;
                 prefs3.edit().putString("outt", outt.get(i)).commit();
                 prefs3.edit().putString("rate",rate.get(i)).commit();
                 prefs3.edit().putString("yopbal",yopbal.get(i)).commit();
+                prefs3.edit().putString("stock",st.get(i)).commit();
+                prefs3.edit().putString("e",e.get(i)).commit();
+                prefs3.edit().putString("addst",addst.get(i)).commit();
                 Intent in = new Intent(this, billing.class);
+                in.putExtra("stock", st.get(i));
                 startActivity(in);
                 finish();
                 flag = 1;
@@ -204,7 +211,7 @@ String openbal;
                     for (DataSnapshot userSnapshot : usersSnapshot.getChildren()) {
                         kioskmake user1 = userSnapshot.getValue(kioskmake.class);
                         String passs = user1.getPass();
-                        if (passs.equals(usernamee)) {
+                        if (passs.equalsIgnoreCase(usernamee)) {
                             userSnapshot.getRef().child("loggedin").setValue("true");
                             userSnapshot.getRef().child("intime").setValue(time);
                             userSnapshot.getRef().child("flagdate").setValue(date);
@@ -274,7 +281,7 @@ public void mo(View view)
                     String fda= user1.getFlagdate();
 
 
-                    if (fda.equals(month))
+                 /*   if (fda.equals(month))
                     {
 
                     }else
@@ -302,12 +309,15 @@ public void mo(View view)
                         //Storing values to firebase
                         ref.push().setValue(sale);
 
-                    }
+                    }*/
                     String ti = user1.getIntime();
                     username.add(name);
                     pass.add(passs);
                     openball.add(user1.getOpeningbal().toString());
                     times.add(ti);
+                    addst.add(user1.getAddstock());
+                    st.add(user1.getYeststock());
+                    e.add(user1.getE());
                     yopbal.add(user1.getYestopeningbal().toString());
                     outt.add(user1.getOuttime().toString());
                     rate.add(user1.getRate());

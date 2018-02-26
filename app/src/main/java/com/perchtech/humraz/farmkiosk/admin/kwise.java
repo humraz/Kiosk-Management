@@ -48,6 +48,7 @@ TextView tv;
     TextView tv3;
     TextView tv5;
     TextView tv4;
+    int dam=0;
     TextView tv45;
 String rate;
     String opbal;
@@ -416,6 +417,8 @@ String rate;
         TextView tv555=(TextView) findViewById(R.id.tv555);
         TextView tv5=(TextView) findViewById(R.id.tv5);
         TextView tv55=(TextView) findViewById(R.id.textView777);
+        TextView tv88=(TextView) findViewById(R.id.tv88);
+        TextView tv00=(TextView) findViewById(R.id.tv00);
 
         String a= String.format("%-38s %-5s","Closing Balance(Rs): ",Integer.toString((ca*n2)-deposit2+Integer.parseInt(yopbal)));
         String av= String.format("%-38s %-5s","Opening Balance(Rs): ",yopbal);
@@ -439,12 +442,17 @@ String rate;
         tv5.setText(String.format("%-38s %-5s","Pay-Tm Sales: "+y, Integer.toString(pay*n)));
         tv555.setText(String.format("%-38s %-5s","Other/NIYO: "+y, Integer.toString(other*n)));
         tv2.setText(String.format("%-38s %-5s","Opening Stock(Units): ", ystock));
-      tv7.setText(String.format("%-38s %-5s","Closing Stock(Units): ", stock));
+        int ss=Integer.parseInt(stock);
+        ss=ss-dam+addedstock;
+        tv88.setText(String.format("%-38s %-5s","Damages(Units): ", dam));
+      tv7.setText(String.format("%-38s %-5s","Closing Stock(Units): ", ss));
+        tv00.setText(String.format("%-38s %-5s","Added Stock(Units): ", Integer.toString(addedstock)));
        // Toast.makeText(this, stock + ystock ,Toast.LENGTH_LONG).show();
 
     }
 String  ystock;
     String stock;
+    int addedstock;
 public void b(View view)
 {
     Intent in = new Intent(this, cashflow.class);
@@ -469,9 +477,11 @@ public void b(View view)
                         stock= sale.getStock();
                         pref3.edit().putString("yopbal",yopbal).commit();
                         op=Integer.parseInt(opbal);
+                        dam =Integer.parseInt(sale.getE());
                         time=sale.getOuttime();
                         time=time.replace(":","");
                         rate=sale.getRate();
+                        addedstock=Integer.parseInt(sale.getAddstock());
                     // hi(amount);
                     if (amount.equals("true"))
                     {

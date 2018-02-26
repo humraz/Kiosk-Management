@@ -253,7 +253,7 @@ System.out.println("chart");
                 default:c.add(getResources().getColor(R.color.black_button));
                     break;
             }
-            values.add( new BarEntry(am/30,j));
+            values.add( new BarEntry(am,j));
             j++;
 
         }

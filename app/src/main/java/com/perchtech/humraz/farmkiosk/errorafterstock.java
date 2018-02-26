@@ -18,6 +18,7 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
+import com.perchtech.humraz.farmkiosk.admin.kwise;
 import com.victor.loading.rotate.RotateLoading;
 
 import java.text.SimpleDateFormat;
@@ -42,10 +43,13 @@ public class errorafterstock extends ActionBarActivity {
     String yopbal;
     ActionProcessButton btnSignIn;
     String rate;
+    int cl2;
     String stockkk;
-
+int stocks;
     int n2;
     RotateLoading rl;
+    int dam;
+    int addst;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,15 +67,21 @@ public class errorafterstock extends ActionBarActivity {
         rate= prefs3.getString("rate",null);
         yopbal= prefs3.getString("yopbal",null);
         n2=Integer.parseInt(rate);
+        dam=Integer.parseInt(prefs3.getString("damage",null));
+
         SimpleDateFormat day = new SimpleDateFormat("dd");
         Intent in = getIntent();
-        stockkk=in.getStringExtra("st");
+        stocks= Integer.parseInt(prefs3.getString("stock",""));
+      //  stockkk=in.getStringExtra("st");
+        cl2=in.getIntExtra("diff",0);
         String opbal=prefs3.getString("openbal",null);
         op =Integer.parseInt(opbal);
         //      out=prefs3.getString("outt",null);
 //        o=Integer.parseInt(out);
         ti=prefs3.getString("time",null);
         ti= ti.replace(":", "");
+        addst=Integer.parseInt(prefs3.getString("addst",null));
+
         t=Integer.parseInt(ti);
         String month= mon.format(new Date());
         String yea= year.format(new Date());
@@ -82,7 +92,7 @@ public class errorafterstock extends ActionBarActivity {
        btnSignIn = (ActionProcessButton) findViewById(R.id.SIG);
         btnSignIn.setEnabled(false);
         url="https://kioskfarm.firebaseio.com/SALES/" + kioskid+"/"+yea+"/"+month+"/"+da;
-        r();
+        read();
 
     }
 
@@ -102,13 +112,13 @@ public class errorafterstock extends ActionBarActivity {
             public void onDataChange(DataSnapshot usersSnapshot) {
                 for (DataSnapshot userSnapshot : usersSnapshot.getChildren()) {
                     kioskmake k = userSnapshot.getValue(kioskmake.class);
-                    String date = k.getIndate();
-                    if (date.equals(d2)) {
-                        userSnapshot.getRef().child("openingbal").setValue(Integer.toString((cash*n2)+Integer.parseInt(yopbal)));
-                        userSnapshot.getRef().child("stock").setValue(stockkk);                      //  f = 0;
-                    }
+
+                        userSnapshot.getRef().child("openingbal").setValue(Integer.toString((cash*n2)-deposit+Integer.parseInt(yopbal)));
+                        userSnapshot.getRef().child("stock").setValue(stocks-sum-dam+addst);                      //  f = 0;
+
                 }
-                btnSignIn.setEnabled(true);
+                r();
+
 
             }
 
@@ -124,7 +134,8 @@ public class errorafterstock extends ActionBarActivity {
     public void r()
     {
         SimpleDateFormat mon = new SimpleDateFormat("dd/MM/yyyy");
-
+        SimpleDateFormat t = new SimpleDateFormat("HH:mm:ss");
+        final String time = t.format(new Date());
         final String date = mon.format(new Date());
         final Firebase ref = new Firebase("https://kioskfarm.firebaseio.com/KIOSKS/");
         //Value event listener for realtime data update
@@ -139,10 +150,21 @@ public class errorafterstock extends ActionBarActivity {
                         if (k.equals(kioskid))
                         {
                             deposit= Integer.parseInt(sale.getDiff());
+                            stockkk=sale.getStock();
+                            userSnapshot.getRef().child("loggedin").setValue("false");
+                            userSnapshot.getRef().child("outtime").setValue(time);
+                            userSnapshot.getRef().child("indate").setValue(date);
+                            userSnapshot.getRef().child("salestatus").setValue("green");
+                            userSnapshot.getRef().child("stock").setValue(stocks-sum);
+
+                            userSnapshot.getRef().child("openingbal").setValue(Integer.toString(cl2));
+                          //  userSnapshot.getRef().child("closingstock").setValue(stocks-sum-dam);
+
                         }
                         //  tost(sum,c,cash,card,paytm);
                     }
-                read();
+                btnSignIn.setEnabled(true);
+
             }
 
             @Override
@@ -154,7 +176,7 @@ public class errorafterstock extends ActionBarActivity {
     }
     public void YO(View view)
     {
-        Intent in = new Intent(this, newlogin.class);
+        Intent in = new Intent(this, kioskhomepage.class);
         startActivity(in);
     }
     int cash=0;
@@ -227,6 +249,16 @@ public class errorafterstock extends ActionBarActivity {
     }
     int n=1;
     int f=1;
+
+    public  void  more(View view)
+    {
+
+        Intent in = new Intent(this, kwise.class);
+        in.putExtra("kid",kioskid);
+        startActivity(in);
+
+
+    }
     public void no(View view)
     {
 
@@ -247,6 +279,10 @@ public class errorafterstock extends ActionBarActivity {
         }
 
         tost(sum, c, cash, card, paytm, other);
+    }
+@Override
+    public void onBackPressed() {
+
     }
 
     public void tost(int sum, int cc,int ca, int car, int pay, int other)

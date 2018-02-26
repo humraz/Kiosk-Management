@@ -69,10 +69,10 @@ public class newlogin extends AppCompatActivity {
         btnSignIn.setEnabled(false);
         Firebase.setAndroidContext(this);
        //
-        // read();
+       // read();
         read3();
       //  write();
-        read2();
+
         boolean c= checkLocationPermission();
         if (c)
         {
@@ -159,7 +159,22 @@ public class newlogin extends AppCompatActivity {
             {
 
             }
-            else if (us2.equals(usernamee) && passs.equals(passs2))
+            else if (ttt==1)
+            {
+                new SweetAlertDialog(newlogin.this, SweetAlertDialog.WARNING_TYPE)
+                        .setTitleText("Old Version Detected!")
+                        .setContentText("You are using an old version that is unstable, press ok to update now.")
+
+                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sDialog) {
+                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.perchtech.humraz.farmkiosk")));                                }
+                        })
+
+                        .show();
+                break;
+            }
+            else if (us2.equalsIgnoreCase(usernamee) && passs.equalsIgnoreCase(passs2))
 
             {
                 SharedPreferences prefs3 = null;
@@ -195,7 +210,7 @@ public class newlogin extends AppCompatActivity {
 
     }
 
-    public void read2() {
+  /*  public void read2() {
         final SimpleDateFormat daaaay = new SimpleDateFormat("dd/MM/yyyy");
         final String month = daaaay.format(new Date());
         final Firebase ref = new Firebase("https://kioskfarm.firebaseio.com/KIOSKS/");
@@ -215,38 +230,6 @@ public class newlogin extends AppCompatActivity {
                     String fda= user1.getFlagdate();
 
 
-                    if (fda.equals(month))
-                    {
-
-                    }else
-                    {
-                        userSnapshot.getRef().child("yestopeningbal").setValue(user1.getOpeningbal().toString());
-                        userSnapshot.getRef().child("flagdate").setValue(month);
-                        userSnapshot.getRef().child("diff").setValue("0");
-
-                        userSnapshot.getRef().child("yeststock").setValue(user1.getStock().toString());
-                        //userSnapshot.getRef().child("openingbal").setValue(user1.getOpeningbal().toString());
-                      //  userSnapshot.getRef().child("stock").setValue(user1.getOpeningbal().toString());
-                        Firebase ref = new Firebase("https://kioskfarm.firebaseio.com/opbal&stock/"+name+"/"+month.replace("/",""));
-
-                        //Getting values to store
-
-                        //Creating Person object
-                        kioskmake sale= new kioskmake();
-
-                        //Adding values
-                        sale.setOpeningbal(user1.getOpeningbal().toString());
-
-                        sale.setStock(user1.getStock().toString());
-                        sale.setYeststock(user1.getStock().toString());
-                        sale.setYestopeningbal(user1.getOpeningbal().toString());
-
-                        sale.setIndate(month);
-
-                        //Storing values to firebase
-                        ref.push().setValue(sale);
-
-                    }
 
                 }
 
@@ -260,9 +243,10 @@ public class newlogin extends AppCompatActivity {
             }
         });
 
-    }
+    }*/
     public void read() {
-
+        final SimpleDateFormat daaaay = new SimpleDateFormat("dd/MM/yyyy");
+        final String month = daaaay.format(new Date());
         final Firebase ref = new Firebase("https://kioskfarm.firebaseio.com/KIOSKS/");
         //Value event listener for realtime data update
 
@@ -278,6 +262,7 @@ public class newlogin extends AppCompatActivity {
                     String name = user1.getPass();
                     String ti = user1.getIntime();
                     String d=user1.getIndate();
+                    String fda = user1.getFlagdate();
                     username.add(name);
                     pass.add(passs);
                     openball.add(user1.getOpeningbal().toString());
@@ -293,6 +278,45 @@ public class newlogin extends AppCompatActivity {
                     }
                     String outputDateStr = outputFormat.format(date);
 
+                    if (fda.equals(month))
+                    {
+
+                    }else
+                    {
+                        userSnapshot.getRef().child("yestopeningbal").setValue(user1.getOpeningbal().toString());
+                        userSnapshot.getRef().child("flagdate").setValue(month);
+                        userSnapshot.getRef().child("diff").setValue("0");
+
+                        int a = Integer.parseInt(user1.getE());
+                        int b = Integer.parseInt(user1.getStock());
+                        int c = Integer.parseInt(user1.getAddstock());
+
+                        userSnapshot.getRef().child("yeststock").setValue(Integer.toString(b-a+c));
+                        userSnapshot.getRef().child("stock").setValue(Integer.toString(b-a+c));
+                        userSnapshot.getRef().child("addstock").setValue("0");
+                        userSnapshot.getRef().child("e").setValue("0");
+                        //userSnapshot.getRef().child("openingbal").setValue(user1.getOpeningbal().toString());
+                        //  userSnapshot.getRef().child("stock").setValue(user1.getOpeningbal().toString());
+                        Firebase ref = new Firebase("https://kioskfarm.firebaseio.com/opbal&stock/"+name+"/"+month.replace("/",""));
+
+                        //Getting values to store
+
+                        //Creating Person object
+                        kioskmake sale= new kioskmake();
+
+                        //Adding values
+                        sale.setOpeningbal(user1.getOpeningbal().toString());
+
+                        sale.setStock(user1.getStock().toString());
+                        sale.setYeststock(Integer.toString(b-a+c));
+                        sale.setYestopeningbal(user1.getOpeningbal().toString());
+
+                        sale.setIndate(month);
+
+                        //Storing values to firebase
+                        ref.push().setValue(sale);
+
+                    }
 
 
                     times.add("Time: " + ti+ "\nDate :\u0020" + outputDateStr);
@@ -320,6 +344,7 @@ public class newlogin extends AppCompatActivity {
 
     }
     String pp;
+    int ttt=0;
     public void read3() {
 
         final Firebase ref = new Firebase("https://kioskfarm.firebaseio.com/VERSION/");
@@ -334,7 +359,7 @@ public class newlogin extends AppCompatActivity {
                     kioskmake user1 = userSnapshot.getValue(kioskmake.class);
 
                         pp=user1.getPass();
-                    if (pp.equals("3.1"))
+                    if (pp.equals("3.8"))
                     {
 
                     }
@@ -343,14 +368,18 @@ public class newlogin extends AppCompatActivity {
                         new SweetAlertDialog(newlogin.this, SweetAlertDialog.WARNING_TYPE)
                                 .setTitleText("Old Version Detected!")
                                 .setContentText("You are using an old version that is unstable, press ok to update now.")
+
                                 .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                     @Override
                                     public void onClick(SweetAlertDialog sDialog) {
                                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.perchtech.humraz.farmkiosk")));                                }
                                 })
+
                                 .show();
+                        ttt=1;
                     }
                 }
+                read();
 
             }
 

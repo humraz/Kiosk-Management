@@ -38,7 +38,6 @@ String number="0";
             R.drawable.board,
 
             R.drawable.exit,
-            R.drawable.egg,
             R.drawable.deposit,
 
 
@@ -51,7 +50,7 @@ String number="0";
 
             R.string.sale,
             R.string.sess,
-            R.string.damages,
+
             R.string.depsi,
 
 
@@ -76,29 +75,41 @@ String number="0";
     int paytm = 0;
     int other=0;
     int card=0;
+    int dam;
     int n2;
     String rate;
+    String pp;
     int p=0;
+    int addst;
+    int s=0;
+    int s3=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_billing);
         tv = (TextView) findViewById(R.id.tv1);
         Firebase.setAndroidContext(this);
+        Intent in = getIntent();
+        pp=in.getStringExtra("stock");
+
+        s=Integer.parseInt(pp);
         r();
        // read();
         SharedPreferences prefs3 = getSharedPreferences("kioskname", MODE_PRIVATE);
-
+s3=Integer.parseInt(prefs3.getString("stock",null));
         pref2 =getSharedPreferences("move",MODE_PRIVATE);
         rate= prefs3.getString("rate",null);
         n2=Integer.parseInt(rate);
+        dam=Integer.parseInt(prefs3.getString("damage",null));
         pref2.edit().putString("f", "1").commit();
         BoomMenuButton bmb = (BoomMenuButton) findViewById(R.id.bmb);
         bmb.setButtonEnum(ButtonEnum.Ham);
         bt=(Button) findViewById(R.id.minus);
         bt.setEnabled(false);
-        bmb.setPiecePlaceEnum(PiecePlaceEnum.HAM_4);
-        bmb.setButtonPlaceEnum(ButtonPlaceEnum.HAM_4);
+        bmb.setPiecePlaceEnum(PiecePlaceEnum.
+                HAM_3);
+        addst=Integer.parseInt(prefs3.getString("addst",null));
+        bmb.setButtonPlaceEnum(ButtonPlaceEnum.HAM_3);
         for (int i = 0; i < bmb.getPiecePlaceEnum().pieceNumber(); i++) {
             HamButton.Builder builder = new HamButton.Builder()
                     .normalTextRes(getString())
@@ -115,11 +126,8 @@ String number="0";
                                 stock(index);
 
                             }
-                            if (index == 2) {
-                                damages(index);
 
-                            }
-                            if (index == 3) {
+                            if (index == 2) {
                                 deposit(index);
 
                             }
@@ -326,12 +334,18 @@ String number="0";
 
         tv11.setText((" | Other "+y+ Integer.toString(other*n)));
 
+        TextView tv2= (TextView) findViewById(R.id.textView3);
+        System.out.println(s);
+        // String p = Integer.toString(s);
+        s=s3;
+        s=s-sum-dam+addst;
+        tv2.setText("Current Stock(Units) : " +Integer.toString(s));
 
       //  tv55.setText(String.format("%-38s %-5s","Cash In Hand(Rs): ", Integer.toString((cash*n2)-deposit+op)));
 
     }
     public void r() {
-        SharedPreferences prefs3= getSharedPreferences("kioskname",MODE_PRIVATE);
+      /*  SharedPreferences prefs3= getSharedPreferences("kioskname",MODE_PRIVATE);
         final  String  k= prefs3.getString("kname", null);
         final Firebase ref = new Firebase("https://kioskfarm.firebaseio.com/KIOSKS/");
         //Value event listener for realtime data update
@@ -349,8 +363,7 @@ String number="0";
                     {
                         stock= user1.getStock();
                         st=Integer.parseInt(stock);
-                        TextView tv= (TextView) findViewById(R.id.textView3);
-                        tv.setText("Current Stock(Units) : " +st);
+
 
                     }
 
@@ -358,8 +371,9 @@ String number="0";
                     // tost(sum);
 
 
-                }
-                bt.setEnabled(true);
+                }*/
+        st=s;
+               // bt.setEnabled(true);
                  if(st==0 && flag==0) {
                      flag=1;
                     new SweetAlertDialog(billing.this, SweetAlertDialog.WARNING_TYPE)
@@ -399,14 +413,14 @@ String number="0";
 
 
 
-            }
+           /* }
 
             @Override
             public void onCancelled(FirebaseError firebaseError) {
                 System.out.println("The read failed: " + firebaseError.getMessage());
             }
         });
-
+*/
     }
     public static int getString() {
         if (str >= Strings.length) str = 0;
@@ -522,9 +536,7 @@ public void one(View view)
     }
     @Override
     public void onBackPressed() {
-        Intent in = new Intent(this, billing.class);
-        startActivity(in);
-    }
+       Toast.makeText(this, "Please Log out If you are done",Toast.LENGTH_SHORT).show();}
     public void six(View view)
     {
         if(tv.getText().toString().equals(""))
@@ -617,6 +629,8 @@ else {
     {
         Intent in = new Intent(this, afterbilling.class);
         in.putExtra("number", number);
+        in.putExtra("stock",st);
+        in.putExtra("checker",s);
         finish();
         startActivity(in);
     }

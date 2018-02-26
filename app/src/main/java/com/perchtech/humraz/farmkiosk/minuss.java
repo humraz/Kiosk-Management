@@ -207,7 +207,7 @@ int st;
     }
     public void find(final String sto )
     {
-        final Firebase ref = new Firebase("https://kioskfarm.firebaseio.com/KIOSKS/");
+     /*   final Firebase ref = new Firebase("https://kioskfarm.firebaseio.com/KIOSKS/");
         //Value event listener for realtime data update
         SharedPreferences prefs3= getSharedPreferences("kioskname",MODE_PRIVATE);
         final  String  k= prefs3.getString("kname", null);
@@ -222,7 +222,7 @@ int st;
                     {
                         userSnapshot.getRef().child("stock").setValue(sto);
                     }
-                }
+                }*/
               //  tv.setText("Current Stock is :"+sto );
 //                tv2.setText("Previous Stock: "+Integer.toString(st));
                 Toast.makeText(minuss.this, "Corrections Done",Toast.LENGTH_LONG).show();
@@ -232,19 +232,20 @@ int st;
                     public void run() {
                         Intent in = new Intent(minuss.this,billing.class);
                         finish();
+                        in.putExtra("stock", sto);
                         startActivity(in);
                     }
                 }, 2000);
 
             }
 
-            @Override
+         /*   @Override
             public void onCancelled(FirebaseError firebaseError) {
                 System.out.println("The read failed: " + firebaseError.getMessage());
             }
-        });
+        });*/
 
-    }
+    //}
 
 
 }

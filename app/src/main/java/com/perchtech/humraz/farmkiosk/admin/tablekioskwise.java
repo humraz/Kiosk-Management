@@ -126,7 +126,7 @@ public class tablekioskwise extends AppCompatActivity {
             url="https://kioskfarm.firebaseio.com/SALES/" + kid+"/"+datt;
             url2="https://kioskfarm.firebaseio.com/opbal&stock/"+kid+"/"+datt4;
 
-            read(url);
+            read(url,datt3);
        //   r(datt3);
        //    read2(url2);
 
@@ -148,7 +148,7 @@ public class tablekioskwise extends AppCompatActivity {
         }, 3000);
 
     }
-    public void r(String datt)
+    public void r(final String datt)
     {
 
         SimpleDateFormat mon = new SimpleDateFormat(datt);
@@ -156,7 +156,7 @@ deposit2=0;
         final String date = mon.format(new Date());
         final Firebase ref = new Firebase("https://kioskfarm.firebaseio.com/deposits/"+kid);
         //Value event listener for realtime data update
-
+        System.out.println("im here"+datt);
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot usersSnapshot) {
@@ -168,7 +168,7 @@ deposit2=0;
                     deposits sale = userSnapshot.getValue(deposits.class);
                     String d= sale.getDate();
                     String kis= sale.getKid();
-                    if (d.equals(date) && kis.equals(kid)) {
+                    if (d.equals(datt) && kis.equals(kid)) {
 
                         amstr = sale.getAmount();
                         amount = Integer.parseInt(amstr);
@@ -176,7 +176,7 @@ deposit2=0;
                     }
                     //  tost(sum,c,cash,card,paytm);
                 }
-
+                System.out.println("im here"+ deposit2);
                 if (deposit2!=0)
                 DATA_TO_SHOW[depooo][5]=Integer.toString(deposit2);
 else
@@ -250,7 +250,7 @@ else
     int other=0;
     int card=0;
     int p=0;
-    public void read( String url)
+    public void read(String url, final String date)
     {cash=0;
         c=0;
         paytm = 0;
@@ -335,7 +335,7 @@ else
                 other=0;
                 card=0;
                 sum=0;
-                r(datt3);
+                r(date);
             }
 
             @Override

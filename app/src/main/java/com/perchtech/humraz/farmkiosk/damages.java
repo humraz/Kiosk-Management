@@ -30,14 +30,14 @@ public class damages extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_damages);
 
-        Intent in = getIntent();
+       /* Intent in = getIntent();
 
         tv=(TextView)findViewById(R.id.textView3);
         //  tv=(TextView)findViewById(R.id.textView43);
         st=in.getIntExtra("stock",0);
-        tv.setText("Stock: " +st);
+        tv.setText("Stock: " +st);*/
     }
-
+    String s;
     public void doo(View view)
     {
 
@@ -49,9 +49,9 @@ public class damages extends AppCompatActivity {
 
             //Getting values to store
             EditText ed = (EditText) findViewById(R.id.editText6);
-            String s = ed.getText().toString();
+            s = ed.getText().toString();
             String news=s;
-            s="-"+s;
+          //  s="-"+s;
             SimpleDateFormat t = new SimpleDateFormat("hh:mm:ss");
 
             String time = t.format(new Date());
@@ -99,14 +99,19 @@ public class damages extends AppCompatActivity {
                     kioskmake ord = userSnapshot.getValue(kioskmake.class);
                     String id2 = ord.getPass();
                     if(id2.equals(k))
+
                     {
-                        userSnapshot.getRef().child("stock").setValue(sto);
+                        int a =Integer.parseInt( ord.getE());
+                        a=a+Integer.parseInt(s);
+
+                        userSnapshot.getRef().child("e").setValue(a);
                     }
                 }
-                tv.setText("Current Stock is :"+sto );
+                //tv.setText("Current Stock is :"+sto );
 //                tv2.setText("Previous Stock: "+Integer.toString(st));
                 Toast.makeText(damages.this, "Damages Confirmed.",Toast.LENGTH_LONG).show();
-                Intent in = new Intent(damages.this,billing.class);
+                Intent in = new Intent(damages.this,kioskhomepage.class);
+              //  in.putExtra("stock", Integer.toString(st));
                 startActivity(in);
 
             }

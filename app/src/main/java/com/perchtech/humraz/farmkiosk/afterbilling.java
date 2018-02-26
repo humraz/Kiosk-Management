@@ -41,6 +41,7 @@ String number;
     String stock;
     RotateLoading rl;
     int no;
+    int check;
     int st;
     ProcessButton pd;
     @Override
@@ -48,6 +49,8 @@ String number;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_afterbilling);
        number= getIntent().getStringExtra("number");
+        st=getIntent().getIntExtra("stock",0);
+        check=getIntent().getIntExtra("checker",0);
       TextView  tv= (TextView) findViewById(R.id.tv1);
         tv.setText(number);
         Firebase.setAndroidContext(this);
@@ -64,13 +67,12 @@ String number;
         String da= day.format(new Date());
          date=da+"-"+month+"-"+yea;
         pd=(ProcessButton) findViewById(R.id.checkout);
-        pd.setEnabled(false);
         url="https://kioskfarm.firebaseio.com/SALES/" + kioskid+"/"+yea+"/"+month+"/"+da;
 
      // func();
 
 
-        r();
+        //r();
 
     }
 /*public  void  func()
@@ -98,7 +100,7 @@ String number;
 }*/
 
 
-    public void r() {
+   /* public void r() {
         SharedPreferences prefs3= getSharedPreferences("kioskname",MODE_PRIVATE);
         final  String  k= prefs3.getString("kname", null);
         final Firebase ref = new Firebase("https://kioskfarm.firebaseio.com/KIOSKS/");
@@ -135,7 +137,7 @@ pd.setEnabled(true);
             }
         });
 
-    }
+    }*/
 
     public void error()
     {
@@ -150,25 +152,19 @@ pd.setEnabled(true);
         final String amount= number;
         no=Integer.parseInt(number);
         st=st-no;
+        check=check-no;
         stock=Integer.toString(st);
         final String time= tyme;
 if(payment.equals(""))
 {
 error();
-}else if(st<0)
+}else if(check<0)
 {
     new SweetAlertDialog(afterbilling.this, SweetAlertDialog.WARNING_TYPE)
             .setTitleText("Alert!")
             .setContentText("Your Stock is too less to perfom this transaction. Consider Changing the amount")
 
-            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                @Override
-                public void onClick(SweetAlertDialog sDialog) {
 
-                Intent in =new Intent(afterbilling.this,billing.class);
-                    startActivity(in);
-                }
-            })
             .show();
 }
         else {
@@ -271,26 +267,11 @@ error();
 
     //Storing values to firebase
     ref.push().setValue(sale);
-*/
-    find(stock);
-    rl = (RotateLoading) findViewById(R.id.rotateloading);
+*/  rl = (RotateLoading) findViewById(R.id.rotateloading);
     rl.start();
+    find(stock);
 
-    final Handler handler = new Handler();
 
-    handler.postDelayed(new Runnable() {
-        @Override
-        public void run() {
-            //Do something after 100ms
-            rl.stop();
-           // Toast.makeText(afterbilling.this, "Successfully Added sale to Server." , Toast.LENGTH_LONG).show();
-
-            Intent in = new Intent(afterbilling.this, billing.class);
-            finish();
-            startActivity(in);
-
-        }
-    }, 700);
 
 }
     }
@@ -326,6 +307,7 @@ payment ="paytm";
     @Override
     public void onBackPressed() {
         Intent in = new Intent(this, billing.class);
+        in.putExtra("stock",Integer.toString(st));
         startActivity(in);
     }
 
@@ -360,7 +342,7 @@ payment="card";
 
     public void find(final String sto )
     {
-        final Firebase ref = new Firebase("https://kioskfarm.firebaseio.com/KIOSKS/");
+       /* final Firebase ref = new Firebase("https://kioskfarm.firebaseio.com/KIOSKS/");
         //Value event listener for realtime data update
         SharedPreferences prefs3= getSharedPreferences("kioskname",MODE_PRIVATE);
         final  String  k= prefs3.getString("kname", null);
@@ -375,28 +357,23 @@ payment="card";
                     {
                         userSnapshot.getRef().child("stock").setValue(sto);
                     }
-                }
-            }
+                }*/
+                rl.stop();
+                // Toast.makeText(afterbilling.this, "Successfully Added sale to Server." , Toast.LENGTH_LONG).show();
+
+                Intent in = new Intent(afterbilling.this, billing.class);
+               in.putExtra("stock",stock);
+                finish();
+                startActivity(in);
+          /*  }
+
 
             @Override
             public void onCancelled(FirebaseError firebaseError) {
                 System.out.println("The read failed: " + firebaseError.getMessage());
             }
         });
-
+*/
     }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }

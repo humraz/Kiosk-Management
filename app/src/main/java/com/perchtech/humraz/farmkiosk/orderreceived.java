@@ -214,7 +214,9 @@ public class orderreceived extends AppCompatActivity implements DatePickerDialog
                     String id2 = ord.getPass();
                     if(id2.equals(k))
                     {
-                        userSnapshot.getRef().child("stock").setValue(sto);
+                        int a = Integer.parseInt(ord.getAddstock().toString());
+                        a=a+Integer.parseInt(amountrec);
+                        userSnapshot.getRef().child("addstock").setValue(Integer.toString(a));
 
 
 

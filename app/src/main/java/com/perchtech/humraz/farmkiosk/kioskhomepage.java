@@ -34,6 +34,8 @@ public class kioskhomepage extends AppCompatActivity {
 
 
             R.drawable.board,
+
+            R.drawable.egg,
             R.drawable.taabb
 
 
@@ -47,7 +49,9 @@ public class kioskhomepage extends AppCompatActivity {
 
             R.string.sale,
 
-            R.string.depsit
+
+            R.string.depsit,
+            R.string.damages
 
 
 
@@ -71,6 +75,9 @@ public class kioskhomepage extends AppCompatActivity {
         String time=pref3.getString("time", null);
         String stock =pref3.getString("outt",null);
         String op = pref3.getString("openbal",null);
+        String d= pref3.getString("e",null);
+       // int dd= Integer.parseInt(d);
+
         String cashdiff =pref3.getString("rate",null);
         TextView tv= (TextView) findViewById(R.id.textView);
         TextView tv2= (TextView) findViewById(R.id.textView2);
@@ -89,12 +96,12 @@ public class kioskhomepage extends AppCompatActivity {
         tv2.setText(time);
 
 tv8.setText("Rate for Kiosk(RS): " +cashdiff);
-        tv4.setText("Current Stock(No.): " +stock);
+        tv4.setText("Current Stock(No.): " );
         tv5.setText("Cash In Hand(Rs.) : " +op);
         BoomMenuButton bmb = (BoomMenuButton) findViewById(R.id.bmb);
         bmb.setButtonEnum(ButtonEnum.Ham);
-        bmb.setPiecePlaceEnum(PiecePlaceEnum.HAM_3);
-        bmb.setButtonPlaceEnum(ButtonPlaceEnum.HAM_3);
+        bmb.setPiecePlaceEnum(PiecePlaceEnum.HAM_4);
+        bmb.setButtonPlaceEnum(ButtonPlaceEnum.HAM_4);
         for (int i = 0; i < bmb.getPiecePlaceEnum().pieceNumber(); i++) {
             HamButton.Builder builder = new HamButton.Builder()
                     .normalTextRes(getString())
@@ -113,6 +120,9 @@ tv8.setText("Rate for Kiosk(RS): " +cashdiff);
 
                             if (index == 2) {
                                 depsit(index);
+                            }
+                            if (index == 3) {
+                                damagess(index);
                             }
 
 
@@ -146,6 +156,12 @@ tv8.setText("Rate for Kiosk(RS): " +cashdiff);
     }
 
     GPSTracker gps;
+    public void damagess(int pos) {
+
+        Intent in = new Intent(this, damages.class);
+       // in.putExtra("stock", st);
+        startActivity(in);
+    }
 public void rate(View view)
 {
     Intent in= new Intent( this, ratechange.class);
@@ -239,9 +255,13 @@ if (name.equals(user1.getPass().toString()))
     int d =Integer.parseInt(user1.getDiff());
     int c= Integer.parseInt(user1.getOpeningbal());
     c=c-d;
+    int dd= Integer.parseInt(user1.getE());
+    int ss= Integer.parseInt(stockk);
+    int addedstock =Integer.parseInt(user1.getAddstock());
+    ss=ss-dd+addedstock;
     TextView tv5= (TextView) findViewById(R.id.textView6);
     TextView tv4= (TextView) findViewById(R.id.textView5);
-    tv4.setText("Current Stock(No.): " +stockk);
+    tv4.setText("Current Stock(No.): " +ss);
 
     tv5.setText("Cash In Hand(Rs.) : " +op);
     SharedPreferences pref3 =null;
@@ -249,6 +269,7 @@ if (name.equals(user1.getPass().toString()))
     pref3.edit().putString("openbal", op).commit();
     pref3.edit().putString("outt",stockk).commit();
     pref3.edit().putString("rate",user1.getRate()).commit();
+    pref3.edit().putString("damage",user1.getE()).commit();
     TextView tv8= (TextView) findViewById(R.id.textView8);
     tv8.setText("Rate for Kiosk(RS): " +user1.getRate());
 

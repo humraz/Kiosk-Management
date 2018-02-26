@@ -10,7 +10,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -54,6 +57,10 @@ public class ordersecond extends ActionBarActivity {
        unique = kname+"/"+da+month+yea+"/"+orderamount+"/"+a;
 
     }
+String a ;
+    int aa;
+
+
     public void confirm2(View v)
     {
 
@@ -68,8 +75,8 @@ public class ordersecond extends ActionBarActivity {
 
         order.setId(unique);
         ref.push().setValue(order);
-        move();
-
+        //read();
+move();
 
     }
     public  void move(){

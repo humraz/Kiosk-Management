@@ -49,7 +49,7 @@ public class tablewise2 extends AppCompatActivity {
     int op = 0;
     TextView tv2;
     int deposit = 0;
-    private static final String[][] DATA_TO_SHOW = new String[8][8];
+    private static final String[][] DATA_TO_SHOW = new String[8][7];
     int d = 0;
     private static final String[] TABLE_HEADERS = {"Date","OP Bal", "CL Bal", "OP STK", "CL STK","DMGS","Added"};
 
@@ -103,10 +103,9 @@ String  url4;
 
         url = "https://kioskfarm.firebaseio.com/SALES/" + kid + "/" + yea + "/" + month + "/" + da;
         url4 ="https://kioskfarm.firebaseio.com/ORDERS/";
-        int dd = 0;
-        dd = Integer.parseInt(da);
 
-        for (l = 0; l < 6; l++) {
+
+        for (l = 0; l < 4; l++) {
             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
             Calendar cal = Calendar.getInstance();
             cal.add(Calendar.DATE, -l);
@@ -141,7 +140,7 @@ y2=0;
             //   r(datt3);
             read2(url2,datt3);
 
-           dd(url3,datt3);
+          dd(url3,datt3);
             ware(url4,datt3);
 
 
@@ -173,6 +172,7 @@ y2=0;
          opstock=0;
          yopball=0;
          ystock=0;
+        System.out.println("hi");
         //Value event listener for realtime data update
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -242,18 +242,16 @@ int yy=0;
                 for (DataSnapshot userSnapshot : usersSnapshot.getChildren()) {
                     wareclass sale = userSnapshot.getValue(wareclass.class);
                     if (sale.getDate().equals(datt3)) {
-                        String t =sale.getDate();
-                        if (t.equals(tyme))
                         yy += Integer.parseInt(sale.getStock().toString());
                         DATA_TO_SHOW[g][5] = Integer.toString(yy);
 
 
                     }
-                    else
-                            yy=0;
+                           // yy=0;
 
 
                 }
+                yy=0;
                 g++;
 
             }

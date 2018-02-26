@@ -45,6 +45,7 @@ Toast.makeText(this ,"Enter an amount first",Toast.LENGTH_LONG).show();
                 }
                 Toast.makeText(ratechange.this, "Rate Change Confirmed.", Toast.LENGTH_LONG).show();
                 Intent in = new Intent(ratechange.this, kioskhomepage.class);
+
                 startActivity(in);
 
             }

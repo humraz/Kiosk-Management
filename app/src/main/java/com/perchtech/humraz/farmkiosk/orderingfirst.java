@@ -69,6 +69,10 @@ String orderamount;
                     if(k.equals(idd))
                     {
                         stock= user1.getStock();
+                        int d= Integer.parseInt(user1.getE());
+                        int add= Integer.parseInt(user1.getAddstock());
+                        int s= Integer.parseInt(stock);
+                        stock =Integer.toString(s-d+add);
 
 
                     }

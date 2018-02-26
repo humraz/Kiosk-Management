@@ -17,7 +17,8 @@ public class kioskmake {
     private String openingbal;
     private String yestopeningbal;
     private String yeststock;
-
+    private String e;
+    private String addstock;
     private String diff;
 
 private String rate;
@@ -160,5 +161,21 @@ private String rate;
 
     public void setFlagdate(String flagdate) {
         this.flagdate = flagdate;
+    }
+
+    public String getE() {
+        return e;
+    }
+
+    public void setE(String e) {
+        this.e = e;
+    }
+
+    public String getAddstock() {
+        return addstock;
+    }
+
+    public void setAddstock(String addstock) {
+        this.addstock = addstock;
     }
 }

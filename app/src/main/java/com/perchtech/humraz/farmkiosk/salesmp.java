@@ -141,7 +141,7 @@ public void chart2()
                     String outputDateStr = outputFormat.format(date);
                     d.add(outputDateStr);
 
-                    values.add( new BarEntry((amou/30),i));
+                    values.add( new BarEntry((amou),i));
                     i++;
 
 
