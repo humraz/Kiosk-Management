@@ -51,7 +51,7 @@
             custom:pb_textProgress="Loading"
             custom:pb_textError="Error"
             custom:pb_colorError="@color/red_error"
-            android:onClick="write"
+            android:onClick="modify"
             android:layout_below="@+id/linearLayout"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal" />

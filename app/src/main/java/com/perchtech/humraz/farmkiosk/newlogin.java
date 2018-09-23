@@ -359,7 +359,7 @@ public class newlogin extends AppCompatActivity {
                     kioskmake user1 = userSnapshot.getValue(kioskmake.class);
 
                         pp=user1.getPass();
-                    if (pp.equals("3.8"))
+                    if (pp.equals("4.3"))
                     {
 
                     }

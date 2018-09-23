@@ -26,15 +26,23 @@ public class depositnewhomepage extends AppCompatActivity {
     int sum = 0;
     String amount;
     int op=0;
+    int r;
+    int st;
     String usernamee;
+    int c;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_depositnewhomepage);
         SharedPreferences prefs3= getSharedPreferences("kioskname", MODE_PRIVATE);
         kioskid = prefs3.getString("kname",null);
+        r = Integer.parseInt(prefs3.getString("rate",null));
+
         SimpleDateFormat time = new SimpleDateFormat("hh:mm:ss");
         tyme= time.format(new Date());
+        Intent in = getIntent();
+        st=in.getIntExtra("stock",0);
+        c=in.getIntExtra("cash",0);
         SimpleDateFormat mon = new SimpleDateFormat("MM");
         SimpleDateFormat year = new SimpleDateFormat("yyyy");
         SimpleDateFormat day = new SimpleDateFormat("dd");
@@ -48,9 +56,10 @@ usernamee=prefs3.getString("kname",null);
         Firebase.setAndroidContext(this);
 
     }
-   public void modify(final String amount)
+   public void modify(View view)
    {
-
+       EditText ed = (EditText) findViewById(R.id.user2) ;
+       amount =ed.getText().toString();
        final Firebase ref = new Firebase("https://kioskfarm.firebaseio.com/KIOSKS/");
        //Value event listener for realtime data update
        ref.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -60,8 +69,10 @@ usernamee=prefs3.getString("kname",null);
                    kioskmake user1 = userSnapshot.getValue(kioskmake.class);
                    String passs = user1.getPass();
                    if (passs.equals(usernamee)) {
-                       int o= Integer.parseInt(user1.getOpeningbal());
-                       o=o-Integer.parseInt(amount);
+                       int o= Integer.parseInt(user1.getYestopeningbal());
+                       int d = Integer.parseInt(user1.getDiff());
+                       o=o-Integer.parseInt(amount)-d+(c*r);
+                       System.out.println("hoiiiiiiii" + o);
                        if (o<0)
                        {
                            Toast.makeText(depositnewhomepage.this, "You are withdrawing more than available!",Toast.LENGTH_LONG).show();
@@ -72,6 +83,7 @@ usernamee=prefs3.getString("kname",null);
                            int a=Integer.parseInt(user1.getDiff());
                            depo=a+Integer.parseInt(amount);
                            userSnapshot.getRef().child("diff").setValue(depo);
+                           write();
 
 
                        }
@@ -90,15 +102,15 @@ usernamee=prefs3.getString("kname",null);
 
 
    }
+
     @Override
     public void onBackPressed() {
-        Intent in = new Intent(this, kioskhomepage.class);
+        Intent in = new Intent(this, billing.class);
         startActivity(in);
     }
-    public void write(View view)
+    public void write()
     {
-        EditText ed = (EditText) findViewById(R.id.user2) ;
-        amount =ed.getText().toString();
+
         if (amount == "")
         {
             Toast.makeText(this,"Enter The Amount First" ,Toast.LENGTH_LONG).show();
@@ -120,7 +132,7 @@ usernamee=prefs3.getString("kname",null);
             person.setKid(kioskid);
 
             ref.push().setValue(person);
-            modify(amount);
+            //modify(amount);
             new SweetAlertDialog(depositnewhomepage.this, SweetAlertDialog.SUCCESS_TYPE)
                     .setTitleText("Deposit has been confirmed")
                     .setContentText("Amount Added On date " + date )
@@ -128,6 +140,7 @@ usernamee=prefs3.getString("kname",null);
                         @Override
                         public void onClick(SweetAlertDialog sDialog) {
                             Intent in  = new Intent( depositnewhomepage.this, billing.class);
+                            in.putExtra("stock", Integer.toString(st));
                             startActivity(in);
 
                         }

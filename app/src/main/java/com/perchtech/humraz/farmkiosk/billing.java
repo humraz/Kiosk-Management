@@ -83,6 +83,8 @@ String number="0";
     int addst;
     int s=0;
     int s3=0;
+    String kioskid;
+    String tyme;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,8 +96,19 @@ String number="0";
 
         s=Integer.parseInt(pp);
         r();
-       // read();
-        SharedPreferences prefs3 = getSharedPreferences("kioskname", MODE_PRIVATE);
+       //
+        SharedPreferences prefs3= getSharedPreferences("kioskname", MODE_PRIVATE);
+        kioskid = prefs3.getString("kname",null);
+        /////GEtting The date
+        SimpleDateFormat time = new SimpleDateFormat("HH:mm:ss");
+        tyme= time.format(new Date());
+        SimpleDateFormat mon = new SimpleDateFormat("MM");
+        SimpleDateFormat year = new SimpleDateFormat("yyyy");
+        SimpleDateFormat day = new SimpleDateFormat("dd");
+        String month= mon.format(new Date());
+        String yea= year.format(new Date());
+        String da= day.format(new Date());
+      //  SharedPreferences prefs3 = getSharedPreferences("kioskname", MODE_PRIVATE);
 s3=Integer.parseInt(prefs3.getString("stock",null));
         pref2 =getSharedPreferences("move",MODE_PRIVATE);
         rate= prefs3.getString("rate",null);
@@ -140,6 +153,13 @@ s3=Integer.parseInt(prefs3.getString("stock",null));
                     .normalImageRes(getImageResource());
             bmb.addBuilder(builder);
         }
+        caa=0;
+        sum = 0;
+        paytm = 0;
+        other=0;
+        card=0;
+        r();
+        read();
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -176,7 +196,7 @@ s3=Integer.parseInt(prefs3.getString("stock",null));
         String month= mon.format(new Date());
         String yea= year.format(new Date());
         String da= day.format(new Date());
-        String url="https://kioskfarm.firebaseio.com/SALES/" + kioskid+"/"+yea+"/"+month+"/"+da;
+        final String url="https://kioskfarm.firebaseio.com/SALES/" + kioskid+"/"+yea+"/"+month+"/"+da;
 
         System.out.println("The read failed: " + kioskid+"/"+yea+"/"+month+"/"+da);
 
@@ -187,10 +207,13 @@ s3=Integer.parseInt(prefs3.getString("stock",null));
             @Override
             public void onDataChange(DataSnapshot usersSnapshot) {
                 String amstr="";
-
+                if (usersSnapshot.exists())
+                {
 
                 for (DataSnapshot userSnapshot : usersSnapshot.getChildren()) {
                     kiosksalesdaily sale = userSnapshot.getValue(kiosksalesdaily.class);
+
+
 
                     System.out.println("The read failed: " + caa+ card+paytm);
                     amstr=sale.getAmount();
@@ -233,6 +256,57 @@ s3=Integer.parseInt(prefs3.getString("stock",null));
                 tost(sum, c, caa, card, paytm, other);
                // btnSignIn.setEnabled(true);
             }
+                else
+                {
+                    final Firebase ref = new Firebase( url);
+                    //Adding values
+                    String p ="cash";
+                    String time= tyme;
+
+                    kiosksalesdaily sale = new kiosksalesdaily();
+                    sale.setPaymentmode(p);
+                    sale.setTime(time);
+                    sale.setAmount("0");
+                    ref.push().setValue(sale);
+                    if (!p.equals("cash")) {
+
+                        sale.setTime(time);
+                        sale.setPaymentmode("cash");
+                        sale.setAmount("0");
+                        ref.push().setValue(sale);
+                    }
+                    //Storing values to firebase
+
+                    if (!p.equals("paytm")) {
+                        sale.setPaymentmode("paytm");
+                        sale.setTime(time);
+                        sale.setAmount("0");
+                        ref.push().setValue(sale);
+                    }
+
+                    if (!p.equals("card")) {
+                        sale.setPaymentmode("card");
+                        sale.setTime(time);
+                        sale.setAmount("0");
+                        ref.push().setValue(sale);
+                    }
+
+                    if (!p.equals("other")) {
+                        sale.setPaymentmode("other");
+                        sale.setTime(time);
+
+                        sale.setAmount("0");
+                        ref.push().setValue(sale);
+                    }
+                    //Storing values to firebase
+
+                }
+
+
+
+
+            }
+
 
             @Override
             public void onCancelled(FirebaseError firebaseError) {
@@ -445,7 +519,8 @@ public void damages(int pos) {
     public void deposit(int pos) {
 
         Intent in = new Intent(this, depositnewhomepage.class);
-        //in.putExtra("stock", st);
+        in.putExtra("stock", st);
+        in.putExtra("cash",caa);
         startActivity(in);
     }
     /*public void orderingg(int pos)

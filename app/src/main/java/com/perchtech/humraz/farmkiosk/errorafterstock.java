@@ -114,10 +114,12 @@ int stocks;
                     kioskmake k = userSnapshot.getValue(kioskmake.class);
 
                         userSnapshot.getRef().child("openingbal").setValue(Integer.toString((cash*n2)-deposit+Integer.parseInt(yopbal)));
-                        userSnapshot.getRef().child("stock").setValue(stocks-sum-dam+addst);                      //  f = 0;
+                        userSnapshot.getRef().child("stock").setValue(stt-sum-dame+add);                      //  f = 0;
 
                 }
-                r();
+
+                btnSignIn.setEnabled(true);
+
 
 
             }
@@ -130,10 +132,12 @@ int stocks;
         //   in.putExtra("diff", Integer.toString(diff));
         //   startActivity(in);
     }
-
+int add=0;
+    int dame=0;
+    int stt=0;
     public void r()
     {
-        SimpleDateFormat mon = new SimpleDateFormat("dd/MM/yyyy");
+        final SimpleDateFormat mon = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat t = new SimpleDateFormat("HH:mm:ss");
         final String time = t.format(new Date());
         final String date = mon.format(new Date());
@@ -149,13 +153,16 @@ int stocks;
                         String k = sale.getPass();
                         if (k.equals(kioskid))
                         {
+                            add= Integer.parseInt(sale.getAddstock());
+                            dame=Integer.parseInt(sale.getE());
                             deposit= Integer.parseInt(sale.getDiff());
                             stockkk=sale.getStock();
+                            stt=Integer.parseInt(sale.getYeststock());
                             userSnapshot.getRef().child("loggedin").setValue("false");
                             userSnapshot.getRef().child("outtime").setValue(time);
                             userSnapshot.getRef().child("indate").setValue(date);
                             userSnapshot.getRef().child("salestatus").setValue("green");
-                            userSnapshot.getRef().child("stock").setValue(stocks-sum);
+                            userSnapshot.getRef().child("stock").setValue(stt-sum);
 
                             userSnapshot.getRef().child("openingbal").setValue(Integer.toString(cl2));
                           //  userSnapshot.getRef().child("closingstock").setValue(stocks-sum-dam);
@@ -163,7 +170,7 @@ int stocks;
                         }
                         //  tost(sum,c,cash,card,paytm);
                     }
-                btnSignIn.setEnabled(true);
+                move2();
 
             }
 
@@ -324,8 +331,8 @@ int stocks;
         tv4.setText(String.format(Integer.toString(car*n)));
         tv5.setText(String.format( Integer.toString(pay*n)));
         tv555.setText(String.format( Integer.toString(other*n)));
-        tv55.setText(String.format(Integer.toString((ca*n2)-deposit+Integer.parseInt(yopbal))));
-        move2();
+        tv55.setText(String.format(Integer.toString(cl2)));
+        r();
 
     }
 

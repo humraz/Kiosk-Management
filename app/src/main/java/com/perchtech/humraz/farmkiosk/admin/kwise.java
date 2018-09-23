@@ -419,13 +419,20 @@ String rate;
         TextView tv55=(TextView) findViewById(R.id.textView777);
         TextView tv88=(TextView) findViewById(R.id.tv88);
         TextView tv00=(TextView) findViewById(R.id.tv00);
+        String a;
+    if (ff==0) {
+       a = String.format("%-38s %-5s", "Closing Balance(Rs): ", Integer.toString((ca * n2) - dd + Integer.parseInt(yopbal)));
+    }
+        else
+    {
+         a =  "Log Out For Closing Balance";
 
-        String a= String.format("%-38s %-5s","Closing Balance(Rs): ",Integer.toString((ca*n2)-deposit2+Integer.parseInt(yopbal)));
+    }
         String av= String.format("%-38s %-5s","Opening Balance(Rs): ",yopbal);
         //a.replace(" ", "&nbsp");
         //a.replace(" ", "&nbsp");
         tv122.setText((a));
-        String b= String.format("%-38s %-5s","Cash Deposit(Rs): ", Integer.toString(deposit2));
+        String b= String.format("%-38s %-5s","Cash Deposit(Rs): ", Integer.toString(dd));
         //b.replace(" ", "&nbsp");
         tv12.setText((b));
         //  String c =String.format("%-38s %-5s","Total Coconuts Sold (No. of Nuts):", Integer.toString(sum));
@@ -445,7 +452,10 @@ String rate;
         int ss=Integer.parseInt(stock);
         ss=ss-dam+addedstock;
         tv88.setText(String.format("%-38s %-5s","Damages(Units): ", dam));
+        if (ff==0)
       tv7.setText(String.format("%-38s %-5s","Closing Stock(Units): ", ss));
+        else
+            tv7.setText("Log out for Closing Stock ");
         tv00.setText(String.format("%-38s %-5s","Added Stock(Units): ", Integer.toString(addedstock)));
        // Toast.makeText(this, stock + ystock ,Toast.LENGTH_LONG).show();
 
@@ -453,12 +463,14 @@ String rate;
 String  ystock;
     String stock;
     int addedstock;
+    int  ff=0;
 public void b(View view)
 {
     Intent in = new Intent(this, cashflow.class);
     startActivity(in);
 }
     String yopbal;
+    int dd=0;
     public void checkopenks() {
         final Firebase ref = new Firebase("https://kioskfarm.firebaseio.com/KIOSKS/");
         //Value event listener for realtime data update
@@ -478,6 +490,7 @@ public void b(View view)
                         pref3.edit().putString("yopbal",yopbal).commit();
                         op=Integer.parseInt(opbal);
                         dam =Integer.parseInt(sale.getE());
+                        dd=Integer.parseInt(sale.getDiff());
                         time=sale.getOuttime();
                         time=time.replace(":","");
                         rate=sale.getRate();
@@ -485,13 +498,17 @@ public void b(View view)
                     // hi(amount);
                     if (amount.equals("true"))
                     {
+
                         tv2.setText(" Kiosk Currently Open.");
+                        ff=1;
                         //tv45.setText("Opening Bal:(Rs) "+opbal);
+
 
                     }
                         else
                         {
-                            tv2.setText("Kiosk is Currently Closed. ");
+                            tv2.setText(" Kiosk is Currently Closed. ");
+                            ff=0;
                             //tv45.setText("Opening Bal:(Rs) "+opbal);
 
 

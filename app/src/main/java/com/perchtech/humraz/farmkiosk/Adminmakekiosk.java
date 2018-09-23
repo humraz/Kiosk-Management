@@ -13,6 +13,9 @@ import com.firebase.client.Firebase;
 import com.perchtech.humraz.farmkiosk.admin.menuadmin;
 import com.perchtech.humraz.farmkiosk.admin.sales;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 import static com.perchtech.humraz.farmkiosk.R.string.cashflow;
@@ -43,14 +46,17 @@ public class Adminmakekiosk extends ActionBarActivity {
 
     //Creating Person object
     kioskmake person = new kioskmake();
-
+    SimpleDateFormat day = new SimpleDateFormat("dd/MM/yyyy");
+    String month = day.format(new Date());
     //Adding values
     person.setPost(pass);
     person.setDiff("0");
     person.setPass(kname);
+    person.setAddstock("0");
     person.setOpeningbal("0");
     person.setStock("0");
     person.setOuttime("3:00");
+    person.setFlagdate(month);
     person.setIntime("3:00");
     person.setIndate("3/3/3");
       person.setYestopeningbal("0");

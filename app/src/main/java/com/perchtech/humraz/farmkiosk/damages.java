@@ -18,6 +18,7 @@ import com.perchtech.humraz.farmkiosk.warehouse.wareclass;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static com.perchtech.humraz.farmkiosk.R.string.damages;
 import static com.perchtech.humraz.farmkiosk.R.string.sale;
 
 public class damages extends AppCompatActivity {
@@ -38,7 +39,7 @@ public class damages extends AppCompatActivity {
         tv.setText("Stock: " +st);*/
     }
     String s;
-    public void doo(View view)
+    public void find()
     {
 
 
@@ -74,7 +75,7 @@ public class damages extends AppCompatActivity {
             ref.push().setValue(sale);
             int so= Integer.parseInt(s);
             st=st+so;
-            find(Integer.toString(st));
+            //find(Integer.toString(st));
 
 
 
@@ -85,8 +86,11 @@ public class damages extends AppCompatActivity {
         Intent in= new Intent(this, damagehistory.class);
         startActivity(in);
     }
-    public void find(final String sto )
-    {
+    public void doo(View view )
+    {            EditText ed = (EditText) findViewById(R.id.editText6);
+
+        s = ed.getText().toString();
+        String news=s;
         final Firebase ref = new Firebase("https://kioskfarm.firebaseio.com/KIOSKS/");
         //Value event listener for realtime data update
         SharedPreferences prefs3= getSharedPreferences("kioskname",MODE_PRIVATE);
@@ -102,17 +106,31 @@ public class damages extends AppCompatActivity {
 
                     {
                         int a =Integer.parseInt( ord.getE());
-                        a=a+Integer.parseInt(s);
+                        int ss= Integer.parseInt(ord.getStock());
+                        int ys=Integer.parseInt(ord.getAddstock());
+                        int d = ss+ys-a-Integer.parseInt(s);
+                        if (d<0)
+                        {
+                            Toast.makeText(damages.this, "You dont have that much stock" , Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            a=a+Integer.parseInt(s);
 
-                        userSnapshot.getRef().child("e").setValue(a);
+                            userSnapshot.getRef().child("e").setValue(a);
+                            Toast.makeText(damages.this, "Damages Confirmed.",Toast.LENGTH_LONG).show();
+                            find();
+                            Intent in = new Intent(damages.this,kioskhomepage.class);
+                            //  in.putExtra("stock", Integer.toString(st));
+                            startActivity(in);
+
+                        }
+
                     }
                 }
                 //tv.setText("Current Stock is :"+sto );
 //                tv2.setText("Previous Stock: "+Integer.toString(st));
-                Toast.makeText(damages.this, "Damages Confirmed.",Toast.LENGTH_LONG).show();
-                Intent in = new Intent(damages.this,kioskhomepage.class);
-              //  in.putExtra("stock", Integer.toString(st));
-                startActivity(in);
+
 
             }
 

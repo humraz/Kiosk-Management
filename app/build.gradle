@@ -22,8 +22,8 @@ android {
         applicationId "com.perchtech.humraz.farmkiosk"
         minSdkVersion 14
         targetSdkVersion 23
-        versionCode 15
-        versionName "3.8"
+        versionCode 20
+        versionName "4.3"
 
     }
     buildTypes {
